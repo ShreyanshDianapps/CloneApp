@@ -6,7 +6,7 @@ import {
 
 GoogleSignin.configure(
   {
-      webClientId:'457001320294-2kpi8rk7j50eh3soiqgusvgn029pqpgd.apps.googleusercontent.com',
+      webClientId:'457001320294-5tq4qb0nepbhrd5lpva56197rahfj9ou.apps.googleusercontent.com',
       offlineAccess:true,
   }
 );

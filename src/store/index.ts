@@ -8,7 +8,7 @@ import { reducers } from '../reducer';
 const persistConfig = {
   key: 'root', // key for localStorage
   storage:AsyncStorage,
-  whitelist: [],
+  whitelist: ['auth'],
 };
 // Create persisted reducer
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -21,4 +21,9 @@ const store = configureStore({
 // Create persistor
 export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+
+
+
+
 export default store;

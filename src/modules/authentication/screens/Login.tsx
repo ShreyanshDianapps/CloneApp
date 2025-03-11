@@ -1,49 +1,55 @@
-import { Pressable, StyleSheet, Text, View,Alert } from 'react-native';
+import { Pressable, StyleSheet, Text, View,Alert, ActivityIndicator } from 'react-native';
 import { Formik } from 'formik';
 import React from 'react';
-import { CommonTextInput } from '@cloneApp/components/CommonTextInput';
+//utils
 import strings from '@cloneApp/utils/strings';
 import color from '@cloneApp/utils/color';
 import { validationSchema } from '@cloneApp/utils/validation';
 import { normalize, vh, vw } from '@cloneApp/utils/dimensions';
 import fonts from '@cloneApp/utils/fonts';
-import { FordwardIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
-import { CommonButton } from '@cloneApp/components/CommonButton';
-//firebase
-import auth from '@react-native-firebase/auth';
-import { CommonBottomComp } from '../components/CommonBottomComp';
-import { Google_signIn } from '@cloneApp/utils/sign_in';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootNavigationStack } from '@cloneApp/utils/type';
+import { FordwardIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
+import { Google_signIn } from '@cloneApp/utils/sign_in';
+import { CommonButton } from '@cloneApp/components/CommonButton';
+import { useAppDispatch,useAppSelector } from '@cloneApp/utils/hooks';
+//components
+import { CommonBottomComp } from '../components/CommonBottomComp';
+import { CommonTextInput } from '@cloneApp/components/CommonTextInput';
+//naviagtion
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { AuthenticationAction, googleSignupAndLoginAction } from '../authenticationAction';
+import { userState } from '@cloneApp/modals';
 
 type Props = {
     navigation:NativeStackNavigationProp<RootNavigationStack,'Login'>
 }
 
  export const Login = (props: Props) => {
+  const dispatch = useAppDispatch();
+  const {loading} = useAppSelector((state)=>state.auth);
   const handleButtonSubmit = async(values:{email:string,password:string})=>{
-    try {
-        const userCredential = await auth().signInWithEmailAndPassword(values.email, values.password);
-        console.log('User signed in successfully:', userCredential.user);
-      } catch (error: any) {
-        if (error.code === 'auth/user-not-found') {
-          Alert.alert('User not found. Please sign up.');
-        } else if (error.code === 'auth/wrong-password') {
-          Alert.alert('Incorrect password. Please try again.');
-        } else {
-          Alert.alert('Either user email or password is incorrect');
-        }
-      }
+      dispatch(AuthenticationAction(values)).unwrap().then((res)=>{
+        console.log('isAuthenticate',res.isAuthenticate);
+            console.log('isAuthenticate',res.isAuthenticate);
+            props.navigation.goBack();
+      }).catch(()=>{
+        Alert.alert('Login failed');
+      });
     };
     //function for handling googleLogin
     const handleGoogleLogin = async()=>{
      const response = await Google_signIn();
-
-
-
+     const payload:userState = {
+           email: response.user.email ?? '', // If null, default to an empty string
+           name: response.user.displayName ?? '', // Default to an empty string
+           userId: response.user.uid ?? '',
+          };
+          dispatch(googleSignupAndLoginAction(payload));
     };
   return (
     <View style={styles.main_SignUp_Container}>
+     {loading && <ActivityIndicator size="large" color={color.PrimaryRed} />}
+
       <Pressable
       onPress={()=>props.navigation.goBack()}><NavigationBackIcon/></Pressable>
       <Text style={styles.headingText}>{strings.login}</Text>
@@ -55,10 +61,6 @@ type Props = {
       }}>
         {({handleChange,handleSubmit,values,errors,touched})=>(
           <View style={styles.formikView}>
-
-     {touched.email && errors.email && (
-      <Text style={styles.errorText}>{errors.email}</Text>
-     )}
       <CommonTextInput
            placeholder={strings.commonPlaceHolder + strings.gap + strings.email}
            text={strings.email}
@@ -72,17 +74,18 @@ type Props = {
       <Text style={styles.errorText}>{errors.email}</Text>
      )}
       <CommonTextInput
-           placeholder={strings.commonPlaceHolder + strings.gap + strings.email}
+           placeholder={strings.commonPlaceHolder + strings.gap + strings.password}
            text={strings.password}
            value={values.password}
+           secureTextEntry={true}
            style={{mainView:styles.textInputView,
             HeadingTextStyle:styles.heading_CommonTextInput_Style,
 
            }}
            onChange={handleChange('password')}
      />
-     {touched.email && errors.email && (
-      <Text style={styles.errorText}>{errors.email}</Text>
+     {touched.email && errors.password && (
+      <Text style={styles.errorText}>{errors.password}</Text>
      )}
     <Pressable style={styles.alreadyHaveAnAccount}>
       <Text >{strings.forgetPassword}</Text>
@@ -116,11 +119,8 @@ type Props = {
   );
 };
 
-
-
 const styles = StyleSheet.create({
   main_SignUp_Container:{
-  //  marginVertical:vh(50),
   marginTop:vh(52),
    marginHorizontal:vw(16),
   },

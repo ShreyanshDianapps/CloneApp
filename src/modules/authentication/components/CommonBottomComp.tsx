@@ -46,7 +46,7 @@ type Props = {
 
 const styles = StyleSheet.create({
     upperText:{
-            marginTop:vh(120),
+            marginTop:vh(100),
           alignSelf:'center',
             fontFamily:fonts.RobotoMedium,
             fontSize:normalize(14),

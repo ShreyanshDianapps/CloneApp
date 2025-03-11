@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import fonts from '@cloneApp/utils/fonts';
 import { normalize, vh, vw } from '../utils/dimensions';
 import color from '@cloneApp/utils/color';
+import { EyeHideIcon, EyeShowIcon } from '@cloneApp/utils/localsvg';
 // import { EyeHideIcon, EyeShowIcon, SearchBarIcon } from '../utils/localSvgImages';
 // Types
 type Props = {
@@ -31,7 +32,7 @@ export const CommonTextInput = (props: Props) => {
             {/* Input Label */}
             {props.text && <Text style={[styles.headingText, props.style?.HeadingTextStyle]}>{props.text}</Text>}
 
-            <View style={[styles.mainView ]}>
+            <View style={[styles.mainView]}>
                 {/* Search Icon */}
                 {/* {props.showSearchBar && <SearchBarIcon style={styles.iconStyle} />} */}
                 {/* Text Input */}
@@ -43,9 +44,10 @@ export const CommonTextInput = (props: Props) => {
                     returnKeyType="next"
                     secureTextEntry={props.secureTextEntry ? !showPassword : false}
                 />
-                {props.secureTextEntry ? showPassword ? <Pressable onPress={() => setShowPassword(!showPassword)}>
-                    {/* <EyeShowIcon height={vh(20)} width={vw(20)} /> */}
-                </Pressable> : <Pressable onPress={() => setShowPassword(!showPassword)} /> : null}
+
+                {props.secureTextEntry ? showPassword ? <Pressable onPress={() => setShowPassword(!showPassword)} style={styles.passwordIcon}>
+                    <EyeShowIcon height={vh(25)} width={vw(25)} />
+                </Pressable> : <Pressable onPress={() => setShowPassword(!showPassword) } style={styles.passwordIcon}><EyeHideIcon height={vh(25)} width={vw(25)} /></Pressable> : null}
             </View>
         </View>
     );
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     },
     headingText: {
         color: color.Black,
-        marginBottom:vh(5),
+        marginBottom: vh(5),
     },
     inputTextStyle: {
 
@@ -67,5 +69,10 @@ const styles = StyleSheet.create({
     },
     iconStyle: {
         marginRight: vw(5),
+    },
+    passwordIcon:{
+        position:'absolute',
+        top:vh(-10),
+        alignSelf:'flex-end',
     },
 });

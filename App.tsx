@@ -8,13 +8,13 @@ import {PersistGate} from 'redux-persist/integration/react';
 const App = () => {
 
   return (
-//   <Provider store={store}>
-// <PersistGate persistor={persistor}>
+  <Provider store={store}>
+<PersistGate persistor={persistor}>
     <NavigationContainer>
        <RootNavigationRouter/>
     </NavigationContainer>
-    // </PersistGate>
-    // </Provider>
+     </PersistGate>
+     </Provider>
   );
 };
 export default App;
