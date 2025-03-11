@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "457001320294",
+    "project_id": "authentication-b25ce",
+    "storage_bucket": "authentication-b25ce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457001320294:android:3fed9b0067326849fd12a7",
+        "android_client_info": {
+          "package_name": "com.cloneapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457001320294-tfp8c3ji3lhf796jfkdegdlql9jsbtms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cloneapp",
+            "certificate_hash": "ee3de0fca860166324fa9ea8290df9b75d0a36d1"
+          }
+        },
+        {
+          "client_id": "457001320294-d6bhdcmlsi8m7nf1u1vv70hd9m7lscje.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdSFo5r9elCNc4edngsp-5y3yX1vO_i40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457001320294-d6bhdcmlsi8m7nf1u1vv70hd9m7lscje.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "457001320294-5tq4qb0nepbhrd5lpva56197rahfj9ou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.CloneApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
