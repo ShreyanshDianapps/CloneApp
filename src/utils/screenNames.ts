@@ -13,6 +13,6 @@ export const screenNames = {
     //shopScreens
     ShopRouter:'ShopRouter',
     MainShopScreen:'MainShopScreen',
-    SelectedCategoryProductScreen:'SelectedCategoryProductScreen'
+    SelectedCategoryProductScreen:'SelectedCategoryProductScreen',
 } as const;
 export type ScreenNames = keyof typeof screenNames

@@ -72,19 +72,19 @@ export type Product = {
     images: string[];
     thumbnail: string;
   };
-  
+
 interface ShopState{
     loading:boolean,
     CategoriesData:CategoriesData[]|[]
     Product:Product[]|[]
 }
-const initialShopState:ShopState={
+const initialShopState:ShopState = {
         loading:false,
         CategoriesData:[],
-        Product:[]
-}
+        Product:[],
+};
 export {
     initialAuthState,
-    initialShopState
+    initialShopState,
 };
 

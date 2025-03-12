@@ -6,7 +6,7 @@ export type AuthNavigationStack={
 //homenaviagtion
 export type HomeNavigationStack={
     MainHomeScreen:undefined
-  
+
 }
 export type ShopNavigationStack={
     MainShopScreen:undefined

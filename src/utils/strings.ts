@@ -23,7 +23,7 @@ export default
     categories:'Categories',
     summerSale:'SUMMER SALES',
     offText:'Up to 50% off',
-    filters:'Filters'
+    filters:'Filters',
 
 
 

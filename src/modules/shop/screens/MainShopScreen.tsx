@@ -1,34 +1,34 @@
-import { FlatList, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native'
-import React, { useCallback, useState, useEffect } from 'react'
-import { HeadingCompnent } from '../components/HeadingCompnent'
-import { DummyImage, NavigationBackIcon } from '@cloneApp/utils/localsvg'
-import { normalize, screenWidth, vh, vw } from '@cloneApp/utils/dimensions'
-import strings from '@cloneApp/utils/strings'
-import color from '@cloneApp/utils/color'
-import fonts from '@cloneApp/utils/fonts'
-import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks'
-import { getCategoriesAction } from '../shopAction'
-import { CategoriesData } from '@cloneApp/modals'
-import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
-import LinearGradient from 'react-native-linear-gradient'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { RootNavigationStack } from '@cloneApp/utils/type'
-import { screenNames } from '@cloneApp/utils/screenNames'
-const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient)
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useState, useEffect } from 'react';
+import { HeadingCompnent } from '../components/HeadingCompnent';
+import { DummyImage, NavigationBackIcon } from '@cloneApp/utils/localsvg';
+import { normalize, screenWidth, vh, vw } from '@cloneApp/utils/dimensions';
+import strings from '@cloneApp/utils/strings';
+import color from '@cloneApp/utils/color';
+import fonts from '@cloneApp/utils/fonts';
+import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
+import { getCategoriesAction } from '../shopAction';
+import { CategoriesData } from '@cloneApp/modals';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
+import LinearGradient from 'react-native-linear-gradient';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootNavigationStack } from '@cloneApp/utils/type';
+import { screenNames } from '@cloneApp/utils/screenNames';
+const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 type Props={
   navigation:NativeStackNavigationProp<RootNavigationStack,'MainShopScreen'>;
 }
 export const MainShopScreen = (props:Props) => {
   const dispatch = useAppDispatch();
-  const categorylist = ["Women", "Men", "Kid"];
+  const categorylist = ['Women', 'Men', 'Kid'];
   const [activeIndigator, setActiveIndigator] = useState(0);
   const [categoryData, setCategoryData] = useState<CategoriesData[]>([]);
-  const { loading } = useAppSelector((state) => state.shop)
+  const { loading } = useAppSelector((state) => state.shop);
   //a function to render items according to categories
   // Dispatch when component mounts
   useEffect(() => {
     dispatch(getCategoriesAction()).unwrap().then((res) => {
-      setCategoryData(res)
+      setCategoryData(res);
     });
   }, [dispatch]);
   // Function to handle category selection
@@ -36,16 +36,16 @@ export const MainShopScreen = (props:Props) => {
     if (index !== activeIndigator) {
       setActiveIndigator(index);
       dispatch(getCategoriesAction()).unwrap().then((res) => {
-        setCategoryData(res)
+        setCategoryData(res);
       });
     }
   }, [activeIndigator, dispatch]);
   //to show the data of the list
   const renderList = ({ item }: { item: CategoriesData }) => {
     return (
-      <Pressable  
+      <Pressable
       onPress={()=>{
-          props.navigation.navigate(screenNames.SelectedCategoryProductScreen,{url:item.url,name:item.name})
+          props.navigation.navigate(screenNames.SelectedCategoryProductScreen,{url:item.url,name:item.name});
       }}
       style={styles.category_Card_comp} disabled={loading}>
         {loading ? (
@@ -61,12 +61,12 @@ export const MainShopScreen = (props:Props) => {
       </Pressable>
     );
   };
-  
-  
-  
+
+
+
 return (
   <View>
-    <HeadingCompnent backIcon={NavigationBackIcon} text={strings.categories}  
+    <HeadingCompnent backIcon={NavigationBackIcon} text={strings.categories}
     isBackIconPressed={(value)=>{
       if(value){
         props.navigation.goBack();
@@ -77,9 +77,9 @@ return (
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item, index }) => <Pressable
         onPress={() => {
-          handleCategorySelect(index)
+          handleCategorySelect(index);
         }} style={styles.genderList}><Text style={styles.genderNameStyle}>{item}</Text>
-        <View style={[activeIndigator === index && styles.lineIndecator]}></View>
+        <View style={[activeIndigator === index && styles.lineIndecator]} />
       </Pressable>}
       contentContainerStyle={styles.flatlistStyle}
     />
@@ -95,8 +95,8 @@ return (
       />
     </View>
   </View>
-)
-}
+);
+};
 const styles = StyleSheet.create({
   flatlistStyle: {
 
@@ -108,18 +108,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: vh(44),
     width: vw(screenWidth * 0.3),
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   lineIndecator: {
     height: vh(4),
     width: vw(screenWidth * 0.33),
     backgroundColor: color.PrimaryRed,
-    marginTop: vh(4)
+    marginTop: vh(4),
   },
   genderNameStyle: {
     marginTop: vh(14),
     fontSize: normalize(16),
-    fontFamily: fonts.RobotoSemiBold
+    fontFamily: fonts.RobotoSemiBold,
   },
   sale_Card_View: {
     marginTop: vh(20),
@@ -129,28 +129,28 @@ const styles = StyleSheet.create({
     backgroundColor: color.PrimaryRed,
     borderRadius: normalize(8),
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   summerSaleText: {
     fontSize: normalize(24),
     fontFamily: fonts.RobotoSemiBold,
-    color: color.Neutral_White
+    color: color.Neutral_White,
   },
   offText: {
     fontFamily: fonts.RobotoMedium,
     fontSize: normalize(14),
-    color: color.Netual_White_Light
+    color: color.Netual_White_Light,
   },
   categoryDataListView: {
     marginHorizontal: vw(16),
-    height: vh(450), marginTop: vh(16)
+    height: vh(450), marginTop: vh(16),
 
   },
   category_Card_comp: {
     width: vw(343),
     height: vh(93),
     flexDirection: 'row',
-    marginBottom: vh(16)
+    marginBottom: vh(16),
   },
   categoryTextView: {
     width: '50%',
@@ -159,11 +159,11 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: normalize(8),
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: color.Netual_White_Light
+    backgroundColor: color.Netual_White_Light,
   },
   shimmerPlaceHolderView:{
     width:vw(343),
-    height:vh(93)
-  }
+    height:vh(93),
+  },
 
-})
+});

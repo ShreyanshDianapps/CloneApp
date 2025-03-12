@@ -8,10 +8,10 @@ import HomeTabIcon from '@cloneApp/assets/images/svg/HomeTab.svg';
 import ShopTabIcon from '@cloneApp/assets/images/svg/ShopTab.svg';
 import DummyImage from '@cloneApp/assets/images/svg/DummyImage.svg';
 import HeartIcon from '@cloneApp/assets/images/svg/HeartIcon.svg';
-import FilledStarIcon from '@cloneApp/assets/images/svg/FilledStar.svg'
-import EmptyStarIcon from '@cloneApp/assets/images/svg/EmptyStar.svg'
-import FilterIcon from '@cloneApp/assets/images/svg/FilterIcon.svg'
-import BottomSheetDropDownIcon from '@cloneApp/assets/images/svg/BottomSheetSort.svg'
+import FilledStarIcon from '@cloneApp/assets/images/svg/FilledStar.svg';
+import EmptyStarIcon from '@cloneApp/assets/images/svg/EmptyStar.svg';
+import FilterIcon from '@cloneApp/assets/images/svg/FilterIcon.svg';
+import BottomSheetDropDownIcon from '@cloneApp/assets/images/svg/BottomSheetSort.svg';
 export {
     FordwardIcon,
     GoogleIcon,
@@ -27,6 +27,6 @@ export {
     FilledStarIcon,
     EmptyStarIcon,
     FilterIcon,
-    BottomSheetDropDownIcon
+    BottomSheetDropDownIcon,
 
 };

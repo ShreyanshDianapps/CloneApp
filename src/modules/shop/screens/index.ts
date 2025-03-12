@@ -1,2 +1,2 @@
-export * from './MainShopScreen'
-export * from './SelectedCategoryProductScreen'
+export * from './MainShopScreen';
+export * from './SelectedCategoryProductScreen';

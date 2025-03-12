@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View ,StyleProp, TextStyle, ViewStyle, Pressable} from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View ,StyleProp, TextStyle, ViewStyle, Pressable} from 'react-native';
+import React from 'react';
 import { SvgProps } from 'react-native-svg';
 import color from '@cloneApp/utils/color';
 import { screenWidth, vh, vw } from '@cloneApp/utils/dimensions';
@@ -19,7 +19,7 @@ type Props = {
  export const HeadingCompnent = (props: Props) => {
   return (
     <View style={[props.style?.mainView,styles.defaultMainView]}>
-        <Pressable 
+        <Pressable
         onPress={()=>props.isBackIconPressed(true)}
         style={styles.backicon}>  {props.backIcon && <props.backIcon />}</Pressable>
       <View style={styles.headingView}>
@@ -27,36 +27,36 @@ type Props = {
       </View>
       {props.Icon && <props.Icon/>}
     </View>
-  )
-}
+  );
+};
 const styles = StyleSheet.create({
     defaultMainView: {
         backgroundColor:color.Netual_White_Light,
         width:vw(screenWidth),
         flexDirection:'row',
         height:vh(88),
-      
+
     },
     defaultHeadingTextStyle: {
         fontSize:vh(18),
         fontFamily:fonts.RobotoSemiBold,
         color:color.Black,
        textAlign:'center',
-       alignSelf:'center'
+       alignSelf:'center',
     },
     headingView:{
         justifyContent:'center',
         alignItems:'center',
-        width:vw(screenWidth*0.8),
-        marginTop:vh(35)
-       
+        width:vw(screenWidth * 0.8),
+        marginTop:vh(35),
+
     },
     backicon:{
         justifyContent:'center',
         alignItems:'center',
-        width:vw(screenWidth*0.1), 
-        marginTop:vh(35)
+        width:vw(screenWidth * 0.1),
+        marginTop:vh(35),
 
-    }
-    
-})
+    },
+
+});

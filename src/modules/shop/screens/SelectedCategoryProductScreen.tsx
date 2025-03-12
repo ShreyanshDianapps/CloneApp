@@ -56,18 +56,18 @@ export const SelectedCategoryProductScreen = (props: Props) => {
 
     const extractTags = (products: Product[]) => {
         const allTags = products.flatMap((product) => product.tags);
-        const uniqueTags = Array.from(new Set(allTags)); 
+        const uniqueTags = Array.from(new Set(allTags));
         if (JSON.stringify(uniqueTags) !== JSON.stringify(tagsArray)) {
             setTagsArray(uniqueTags);
         }
     };
 
     const handleSelectedTagData = (item: string) => {
-        const filterddata=Product.filter((product) => product.tags.includes(item));
-        if(filterddata.length>0){
+        const filterddata = Product.filter((product) => product.tags.includes(item));
+        if(filterddata.length > 0){
             setProductData(filterddata);
         }
-       
+
     };
 
     const renderTags = useCallback(({ item }: { item: string }) => (
@@ -80,7 +80,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
                 </Text>
             )}
         </Pressable>
-    ), [loading,productData]);
+    ), [loading,productData,handleSelectedTagData]);
 
     const renderCards = useCallback(({ item }: { item: Product }) => (
         <Pressable style={styles.mainListComp}>
@@ -154,13 +154,13 @@ export const SelectedCategoryProductScreen = (props: Props) => {
 
 const styles = StyleSheet.create({
     mainListComp: {
-        marginEnd: vw(20)
+        marginEnd: vw(20),
     },
     taglistStyle:{
         marginTop:vh(10),
         gap:normalize(10),
         marginBottom:vh(10),
-       marginHorizontal:vw(16)
+       marginHorizontal:vw(16),
     },
     TagStyle:{
         paddingHorizontal:vw(10),
@@ -168,15 +168,15 @@ const styles = StyleSheet.create({
         backgroundColor:color.Black,
         borderRadius:normalize(20),
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
     },
     tagNameTextStyle:{
         color:color.Netual_White_Light,
-        fontFamily:fonts.RobotoMedium
+        fontFamily:fonts.RobotoMedium,
     },
     shimmerTagStyle:{
         height:vh(30),
-        
+
     },
     shimmerPlaceHolderImageView: {
         height: vh(184),
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     productListView: {
         marginHorizontal: vw(16),
         gap: normalize(16),
-        marginTop: vh(30)
+        marginTop: vh(30),
     },
     saveView: {
         position: 'absolute',
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
         borderRadius: normalize(18),
         backgroundColor: color.Neutral_White,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     shimmerSaveView: {
         position: 'absolute',
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
             marginTop:vh(8),
             alignItems:'center',
             gap:normalize(3),
-            width:'80%'
+            width:'80%',
     },
     overlayView: {
         position: 'absolute',
@@ -222,39 +222,39 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
         zIndex: 1,
-        backgroundColor: 'rgba(0,0,0,0.1)'
+        backgroundColor: 'rgba(0,0,0,0.1)',
     },
     ratingCompRateingView:{
         gap:normalize(2),
-        flexDirection:'row'
+        flexDirection:'row',
     },
     reviewTextStyle:{
         fontFamily:fonts.RobotoMedium,
         fontSize:normalize(10),
-        color:color.Gray3
+        color:color.Gray3,
     },
     titleTextStyle:{
         fontSize:normalize(11),
         fontFamily:fonts.RobotoMedium,
         color:color.Gray3,
-        width:vw(162/1.19),
-        marginTop:vh(4)
+        width:vw(162 / 1.19),
+        marginTop:vh(4),
     },
     brandTextStyle:{
         fontSize:normalize(16),
         fontFamily:fonts.RobotoRegular,
-        marginTop:vh(5)
+        marginTop:vh(5),
     },
     priceView:{
         flexDirection:'row',
         marginTop:vh(4),
-        gap:normalize(5)
+        gap:normalize(5),
     },
     oldPrice:{
         fontSize:normalize(14),
         fontFamily:fonts.RobotoCondensedRegular,
         color:color.Gray2,
-        textDecorationLine:'line-through'
+        textDecorationLine:'line-through',
     },
     finalPriceText:{
         fontSize:normalize(14),
@@ -262,10 +262,10 @@ const styles = StyleSheet.create({
         color:color.Gray2,
     },
     newPrice:{
-        color:color.PrimaryRed
+        color:color.PrimaryRed,
     },
     filter_sort_View:{
-        flexDirection:'row'
+        flexDirection:'row',
     },
     filterIconView:{
         flexDirection:'row',
@@ -273,12 +273,12 @@ const styles = StyleSheet.create({
         marginTop:vh(8),
         alignItems:'center',
         paddingHorizontal:vw(5),
-        width:'30%'
+        width:'30%',
     },
     sortingView:{
         flexDirection:'row',
         width:'70%',
         alignItems:'center',
         marginTop:vh(8),
-    }
+    },
 });

@@ -2,7 +2,7 @@ export default {
     overlayColor: 'rgba(0,0,0,0.5)',
     Neutral_White: '#FFFFFF',
     Netual_White_Light:'#F9F9F9',
-  
+
     Black: '#222222',
     Gray1: '#484848',
     Gray2: '#797979',

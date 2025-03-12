@@ -8,31 +8,31 @@
 //                 }
 //     }
 
-import { PRODUCTS_CATEGORIES_URL } from "@cloneApp/utils/endPoints";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { PRODUCTS_CATEGORIES_URL } from '@cloneApp/utils/endPoints';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // );
-export const getCategoriesAction=createAsyncThunk(
+export const getCategoriesAction = createAsyncThunk(
     'shop/getCategories',
     async(rejectWithValue)=>{
         try{
-            const response= await axios.get(PRODUCTS_CATEGORIES_URL);
-            return  response.data
-            
+            const response = await axios.get(PRODUCTS_CATEGORIES_URL);
+            return  response.data;
+
         }catch(error){
-                return rejectWithValue
+                return rejectWithValue;
         }
     }
-)
-export const getProductListByCategoryAction=createAsyncThunk(
+);
+export const getProductListByCategoryAction = createAsyncThunk(
     'shop/getProductListByCategory',
     async(payload:string,{rejectWithValue})=>{
         try{
-            const response=await axios.get(payload)
-            return response.data.products
+            const response = await axios.get(payload);
+            return response.data.products;
         }catch(error){
-            return rejectWithValue
+            return rejectWithValue;
         }
     }
-)
+);
