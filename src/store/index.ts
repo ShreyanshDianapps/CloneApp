@@ -8,7 +8,7 @@ import { reducers } from '../reducer';
 const persistConfig = {
   key: 'root', // key for localStorage
   storage:AsyncStorage,
-  whitelist: ['auth'],
+  whitelist: ['auth','shop'],
 };
 // Create persisted reducer
 const persistedReducer = persistReducer(persistConfig, reducers);

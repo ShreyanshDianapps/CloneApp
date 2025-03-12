@@ -19,6 +19,7 @@ import { CommonTextInput } from '@cloneApp/components/CommonTextInput';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AuthenticationAction, googleSignupAndLoginAction } from '../authenticationAction';
 import { userState } from '@cloneApp/modals';
+import { screenNames } from '@cloneApp/utils/screenNames';
 
 type Props = {
     navigation:NativeStackNavigationProp<RootNavigationStack,'Login'>
@@ -31,7 +32,7 @@ type Props = {
       dispatch(AuthenticationAction(values)).unwrap().then((res)=>{
         console.log('isAuthenticate',res.isAuthenticate);
             console.log('isAuthenticate',res.isAuthenticate);
-            props.navigation.goBack();
+            props.navigation.navigate(screenNames.BottomNavigation);
       }).catch(()=>{
         Alert.alert('Login failed');
       });
@@ -44,7 +45,8 @@ type Props = {
            name: response.user.displayName ?? '', // Default to an empty string
            userId: response.user.uid ?? '',
           };
-          dispatch(googleSignupAndLoginAction(payload));
+          await dispatch(googleSignupAndLoginAction(payload));
+          props.navigation.navigate(screenNames.BottomNavigation);
     };
   return (
     <View style={styles.main_SignUp_Container}>

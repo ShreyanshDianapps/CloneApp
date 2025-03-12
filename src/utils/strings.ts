@@ -1,3 +1,4 @@
+
 export default
 {
      //commonPlaceHolders
@@ -5,6 +6,7 @@ export default
 
      //common symbols
      gap:' ',
+     dollar:'$',
     //Authentication Strings
     sign:'Sign',
     up:'up',
@@ -17,8 +19,11 @@ export default
     or:'Or',
     withSocialAccout:'with social account',
     forgetPassword:'Forget Password?',
-
-
+    //shoppageStrings
+    categories:'Categories',
+    summerSale:'SUMMER SALES',
+    offText:'Up to 50% off',
+    filters:'Filters'
 
 
 
