@@ -1,4 +1,5 @@
 
+
 export const screenNames = {
 
     //Authentication Screens
@@ -14,5 +15,9 @@ export const screenNames = {
     ShopRouter:'ShopRouter',
     MainShopScreen:'MainShopScreen',
     SelectedCategoryProductScreen:'SelectedCategoryProductScreen',
+    FilterScreen:'FilterScreen',
+    BrandsScreen:'BrandsScreen',
+    BottomSheetSortScreen:'BottomSheetSortScreen',
+    ProductScreen:'ProductScreen',
 } as const;
 export type ScreenNames = keyof typeof screenNames

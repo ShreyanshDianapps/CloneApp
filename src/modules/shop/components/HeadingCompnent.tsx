@@ -31,7 +31,7 @@ type Props = {
 };
 const styles = StyleSheet.create({
     defaultMainView: {
-        backgroundColor:color.Netual_White_Light,
+        backgroundColor:color.Neutral_White,
         width:vw(screenWidth),
         flexDirection:'row',
         height:vh(88),

@@ -24,6 +24,13 @@ export default
     summerSale:'SUMMER SALES',
     offText:'Up to 50% off',
     filters:'Filters',
+    priceRange:'Price range',
+    ratingRange:'Rating range',
+    brands:'Brands',
+    search:'Search',
+    discard:'Discard',
+    apply:'Apply',
+    sortBy:'Sort By',
 
 
 

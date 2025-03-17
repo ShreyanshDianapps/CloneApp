@@ -8,18 +8,21 @@ import fonts from '@cloneApp/utils/fonts';
 import { normalize, vh, vw } from '../utils/dimensions';
 import color from '@cloneApp/utils/color';
 import { EyeHideIcon, EyeShowIcon } from '@cloneApp/utils/localsvg';
+import { SvgProps } from 'react-native-svg';
 // import { EyeHideIcon, EyeShowIcon, SearchBarIcon } from '../utils/localSvgImages';
 // Types
 type Props = {
     text?: string; // Label text
+    searchIcon?:React.FC<SvgProps>
     placeholder?: string; // Placeholder text
     value: string; // Input value
     style?: {
         mainView?: StyleProp<ViewStyle>;
+        mainViewInput?: StyleProp<ViewStyle>;
         HeadingTextStyle?: StyleProp<TextStyle>;
         InputTextStyle?: StyleProp<TextStyle>;
     };
-    showSearchBar?: boolean; // Whether to show search icon
+
     onChange: (value: string) => void; // Function triggered on text change
     secureTextEntry?: boolean; // For password fields
 
@@ -32,9 +35,9 @@ export const CommonTextInput = (props: Props) => {
             {/* Input Label */}
             {props.text && <Text style={[styles.headingText, props.style?.HeadingTextStyle]}>{props.text}</Text>}
 
-            <View style={[styles.mainView]}>
+            <View style={[props.style?.mainViewInput]}>
                 {/* Search Icon */}
-                {/* {props.showSearchBar && <SearchBarIcon style={styles.iconStyle} />} */}
+              {props.searchIcon && <props.searchIcon/>}
                 {/* Text Input */}
                 <TextInput
                     placeholder={props.placeholder}

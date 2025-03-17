@@ -12,6 +12,10 @@ import FilledStarIcon from '@cloneApp/assets/images/svg/FilledStar.svg';
 import EmptyStarIcon from '@cloneApp/assets/images/svg/EmptyStar.svg';
 import FilterIcon from '@cloneApp/assets/images/svg/FilterIcon.svg';
 import BottomSheetDropDownIcon from '@cloneApp/assets/images/svg/BottomSheetSort.svg';
+import DollarIcon from '@cloneApp/assets/images/svg/DollarSvg.svg';
+import SearchIcon from '@cloneApp/assets/images/svg/SearchIcon.svg';
+import TickIcon from '@cloneApp/assets/images/svg/TickIcon.svg';
+
 export {
     FordwardIcon,
     GoogleIcon,
@@ -28,5 +32,9 @@ export {
     EmptyStarIcon,
     FilterIcon,
     BottomSheetDropDownIcon,
+    DollarIcon,
+    SearchIcon,
+    TickIcon,
+
 
 };

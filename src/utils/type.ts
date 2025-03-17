@@ -11,6 +11,11 @@ export type HomeNavigationStack={
 export type ShopNavigationStack={
     MainShopScreen:undefined
     SelectedCategoryProductScreen:{url:string,name:string}
+    FilterScreen:{ brands:string[],callBack?: (data: number[]) => void };
+    BrandsScreen:{brands:string[],callBackBrand?:(data:string[])=>void};
+    BottomSheetSortScreen:{data:string[],callBackIndex?:(index:number)=>void,headingText?:string,index?:number}
+    ProductScreen:{id:number}
+
 }
 export type BottomNavigationStack={
     HomeRouter:undefined
@@ -30,4 +35,8 @@ export type RootNavigationStack={
     ShopRouter:undefined
     MainShopScreen:undefined
     SelectedCategoryProductScreen:{url:string,name:string}
+    FilterScreen:{ brands:string[],callBack?: (data: number[]) => void };
+    BrandsScreen:{brands:string[],callBackBrand?:(data:string[])=>void};
+    BottomSheetSortScreen:{data:string[],callBackIndex?:(index:number)=>void,headingText?:string,index?:number}
+    ProductScreen:{id:number}
 }

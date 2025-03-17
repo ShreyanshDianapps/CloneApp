@@ -28,6 +28,7 @@ const initialAuthState:AuthState = {
     loading:false,
     user:null,
 };
+//categories data
 export type CategoriesData={
     slug:string,
     name:string,
@@ -72,17 +73,29 @@ export type Product = {
     images: string[];
     thumbnail: string;
   };
-
+//filterd data type
+export type FilteredData={
+    priceRange:number[];
+    ratingRange:number[];
+    brands:string[]
+}
 interface ShopState{
     loading:boolean,
     CategoriesData:CategoriesData[]|[]
     Product:Product[]|[]
+    Filter: FilteredData|null
+    ProductData:Product|null
 }
+
 const initialShopState:ShopState = {
         loading:false,
         CategoriesData:[],
         Product:[],
+        Filter: null,
+        ProductData:null,
+
 };
+
 export {
     initialAuthState,
     initialShopState,

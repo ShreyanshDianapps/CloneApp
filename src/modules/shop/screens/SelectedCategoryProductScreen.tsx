@@ -15,6 +15,9 @@ import { normalize, vh, vw } from '@cloneApp/utils/dimensions';
 import color from '@cloneApp/utils/color';
 import fonts from '@cloneApp/utils/fonts';
 import strings from '@cloneApp/utils/strings';
+import { dropDownSortArray } from '@cloneApp/utils/comonConstraints';
+import { screenNames } from '@cloneApp/utils/screenNames';
+
 
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 
@@ -22,7 +25,7 @@ type Props = {
     navigation: NativeStackNavigationProp<RootNavigationStack, 'SelectedCategoryProductScreen'>;
 };
 
-const RatingComp = ({ rating }: { rating: number }) => {
+export const RatingComp = ({ rating }: { rating: number }) => {
     return (
         <View style={styles.ratingCompRateingView}>
             {Array.from({ length: 5 }, (_, i) => (
@@ -33,13 +36,17 @@ const RatingComp = ({ rating }: { rating: number }) => {
         </View>
     );
 };
+//bottom sheet componet
+
 
 export const SelectedCategoryProductScreen = (props: Props) => {
     const route = useRoute<RouteProp<ShopNavigationStack, 'SelectedCategoryProductScreen'>>();
     const { name, url } = route.params;
-    const { loading,Product } = useAppSelector((state) => state.shop);
+    const { loading,Product,Filter } = useAppSelector((state) => state.shop);
     const [productData, setProductData] = useState<Product[]>([]);
     const [tagsArray, setTagsArray] = useState<string[]>([]);
+    const [allBrands,setAllBrands] = useState<string[]>([]);
+   const [selectedDropDownValue,setSelectedDropDownValue] = useState(0);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -48,11 +55,26 @@ export const SelectedCategoryProductScreen = (props: Props) => {
             .then((res) => {
                 setProductData(res);
                 extractTags(res);
+                extractBrands(res);
             })
             .catch(() => {
                 props.navigation.goBack();
             });
     }, [dispatch, url]);
+    useEffect(() => {
+        if (Filter && productData.length > 0) {
+          const filteredData = productData.filter(
+            (item) =>
+              item.price >= Filter.priceRange[0] &&
+              item.price <= Filter.priceRange[1] &&
+              item.rating >= Filter.ratingRange[0] &&
+              item.rating <= Filter.ratingRange[1] &&
+              Filter.brands.includes(item.brand)
+          );
+
+          setProductData(filteredData);
+        }
+      }, [Filter]);
 
     const extractTags = (products: Product[]) => {
         const allTags = products.flatMap((product) => product.tags);
@@ -61,7 +83,35 @@ export const SelectedCategoryProductScreen = (props: Props) => {
             setTagsArray(uniqueTags);
         }
     };
+    const extractBrands = (products: Product[]) => {
+        const allBrands = new Set(products.map((item) =>item?.brand));
+        const uniqueBrands = Array.from(new Set(allBrands));
+        if (JSON.stringify(uniqueBrands) !== JSON.stringify(allBrands)) {
+            setAllBrands(uniqueBrands);
+        }
+      };
+    const callBack = (data:number[])=>{
 
+
+
+    };
+    const callBackIndex = (data:number)=>{
+        console.log(data);
+        setSelectedDropDownValue(data);
+        if (data === 0) {
+            const filteredData = [...productData].sort((a, b) => b.rating - a.rating);
+            setProductData(filteredData);
+          }
+          else if (data === 1) {
+            const filteredData = [...productData].sort((a, b) => a.price - b.price);
+            setProductData(filteredData);
+          }
+        else{
+            const filteredData = [...productData].sort((a, b) => b.price - a.price);
+            setProductData(filteredData);
+        }
+
+    };
     const handleSelectedTagData = (item: string) => {
         const filterddata = Product.filter((product) => product.tags.includes(item));
         if(filterddata.length > 0){
@@ -83,7 +133,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
     ), [loading,productData,handleSelectedTagData]);
 
     const renderCards = useCallback(({ item }: { item: Product }) => (
-        <Pressable style={styles.mainListComp}>
+        <Pressable style={styles.mainListComp} onPress={()=>props.navigation.navigate(screenNames.ProductScreen,{id:item.id})}>
             {loading ? (
                 <ShimmerPlaceHolder style={styles.shimmerPlaceHolderImageView} />
             ) : (
@@ -133,12 +183,13 @@ export const SelectedCategoryProductScreen = (props: Props) => {
                 showsHorizontalScrollIndicator={false}
             />
             <View style={styles.filter_sort_View}>
-                <Pressable style={styles.filterIconView}>
+                <Pressable onPress={()=>props.navigation.navigate(screenNames.FilterScreen,{brands:allBrands,callBack})} style={styles.filterIconView}>
                 <FilterIcon/>
                 <Text>{strings.filters}</Text>
                 </Pressable>
-                <Pressable style={styles.sortingView}>
+                <Pressable style={styles.sortingView} onPress={()=>props.navigation.navigate(screenNames.BottomSheetSortScreen,{data:dropDownSortArray,callBackIndex,headingText:strings.sortBy,index:selectedDropDownValue})}>
                         <BottomSheetDropDownIcon/>
+                        <Text>{dropDownSortArray[selectedDropDownValue]}</Text>
                 </Pressable>
             </View>
             <FlatList
@@ -280,5 +331,6 @@ const styles = StyleSheet.create({
         width:'70%',
         alignItems:'center',
         marginTop:vh(8),
+        gap:normalize(5),
     },
 });

@@ -4,21 +4,24 @@ import { StyleSheet, View } from 'react-native';
 import { screenNames } from '../utils/screenNames';
 import { HomeRouter } from './HomeRouter';
 import { BottomNavigationStack } from '../utils/type';
+import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 
 import { vh, vw } from '../utils/dimensions';
-import color from '../utils/color';
-import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
+// import color from '../utils/color';
+// import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 import { HomeTabIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
 import { ShopRouter } from './ShopRouter';
 
 const Bottom = createBottomTabNavigator<BottomNavigationStack>();
-// const hideBottomTab = (route:Partial<Route<string>>)=>{
-//   const routeName = getFocusedRouteNameFromRoute(route);
-//     const hideOnScreens = [
-//       screenNames.ChatScreen,
-//     ];
-//     return !hideOnScreens.includes(routeName);
-// };
+const hideBottomTab = (route:Partial<Route<string>>)=>{
+  const routeName = getFocusedRouteNameFromRoute(route);
+    const hideOnScreens = [
+      screenNames.FilterScreen,
+      screenNames.BrandsScreen,
+      screenNames.BottomSheetSortScreen,
+    ];
+    return !hideOnScreens.includes(routeName);
+};
 
 
 export const BottomNavigation = () => {
@@ -27,7 +30,7 @@ export const BottomNavigation = () => {
     screenOptions={({ route }) => ({
       headerShown: false,
       tabBarShowLabel: false,
-      // tabBarStyle: hideBottomTab(route) ? styles.tabBarStyle : { display: 'none' }, // Correct usage of route
+      tabBarStyle: hideBottomTab(route) ? styles.tabBarStyle : { display: 'none' }, // Correct usage of route
     })}
   >
       {/* Home Screen */}

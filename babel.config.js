@@ -3,7 +3,7 @@ module.exports = {
   plugins: [
     [
       'module-resolver',
-      {
+      {  // ✅ The settings object should be inside the same array entry
         root: ['./src'],
         extensions: [
           '.ios.js',
@@ -19,5 +19,7 @@ module.exports = {
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 };
+
