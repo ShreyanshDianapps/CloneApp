@@ -8,8 +8,10 @@
 //                 }
 //     }
 
+import { Review } from '@cloneApp/modals';
 import { GET_PRODUCT_BY_ID, PRODUCTS_CATEGORIES_URL } from '@cloneApp/utils/endPoints';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import firestore from '@react-native-firebase/firestore';
 import axios from 'axios';
 
 // );
@@ -47,3 +49,18 @@ export const getProductById = createAsyncThunk(
         }
     }
 );
+export const storeReviews=createAsyncThunk(
+    'shop/storeRevies',
+    async(payload:Review,{rejectWithValue})=>{
+        try{
+            try{
+            await firestore().collection('users').doc(payload.userId).collection('reviews').doc(payload.Product.id.toString()).set(payload);
+            }catch(error){
+                console.log(error)
+            }
+            return true;
+        }catch(error){
+            return rejectWithValue
+        }
+    }
+)

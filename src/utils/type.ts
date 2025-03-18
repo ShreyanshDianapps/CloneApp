@@ -1,3 +1,4 @@
+import { Product } from '@cloneApp/modals';
 import { NavigatorScreenParams } from '@react-navigation/native';
 export type AuthNavigationStack={
     SignUp:undefined,
@@ -15,6 +16,8 @@ export type ShopNavigationStack={
     BrandsScreen:{brands:string[],callBackBrand?:(data:string[])=>void};
     BottomSheetSortScreen:{data:string[],callBackIndex?:(index:number)=>void,headingText?:string,index?:number}
     ProductScreen:{id:number}
+    AdditionalInformation:{data:Product}
+    BottomSheetReviwComp:{data:Product}
 
 }
 export type BottomNavigationStack={
@@ -39,4 +42,6 @@ export type RootNavigationStack={
     BrandsScreen:{brands:string[],callBackBrand?:(data:string[])=>void};
     BottomSheetSortScreen:{data:string[],callBackIndex?:(index:number)=>void,headingText?:string,index?:number}
     ProductScreen:{id:number}
+    AdditionalInformation:{data:Product}
+    BottomSheetReviwComp:{data:Product}
 }

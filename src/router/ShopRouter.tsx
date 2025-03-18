@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {  ShopNavigationStack } from '@cloneApp/utils/type';
 import { screenNames } from '@cloneApp/utils/screenNames';
-import {  BottomSheetSortScreen, BrandsScreen, FilterScreen, MainShopScreen, ProductScreen, SelectedCategoryProductScreen } from '@cloneApp/modules';
+import {  AdditionalInformation, BottomSheetReviwComp, BottomSheetSortScreen, BrandsScreen, FilterScreen, MainShopScreen, ProductScreen, SelectedCategoryProductScreen } from '@cloneApp/modules';
 const Shop = createStackNavigator<ShopNavigationStack>();
 export const ShopRouter = () => {
   return (
@@ -17,7 +17,11 @@ export const ShopRouter = () => {
     }}
      name={screenNames.BottomSheetSortScreen} component={BottomSheetSortScreen}/>
      <Shop.Screen name={screenNames.ProductScreen} component={ProductScreen}/>
-
+     <Shop.Screen name={screenNames.AdditionalInformation} component={AdditionalInformation}/>
+     <Shop.Screen
+      options={{
+        presentation: 'transparentModal',
+      }} name={screenNames.BottomSheetReviwComp} component={BottomSheetReviwComp}/>
     </Shop.Navigator>
   );
 };

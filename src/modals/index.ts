@@ -79,6 +79,12 @@ export type FilteredData={
     ratingRange:number[];
     brands:string[]
 }
+export type Review={
+    userId:string,
+    Product:Product,
+    ratings:number,
+    comment:string,
+}
 interface ShopState{
     loading:boolean,
     CategoriesData:CategoriesData[]|[]

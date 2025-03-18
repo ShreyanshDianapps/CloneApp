@@ -22,7 +22,6 @@ type Props = {
         HeadingTextStyle?: StyleProp<TextStyle>;
         InputTextStyle?: StyleProp<TextStyle>;
     };
-
     onChange: (value: string) => void; // Function triggered on text change
     secureTextEntry?: boolean; // For password fields
 
@@ -30,6 +29,7 @@ type Props = {
 
 export const CommonTextInput = (props: Props) => {
     const [showPassword, setShowPassword] = useState(false);
+    const[text,setText]=useState('');
     return (
         <View style={[props.style?.mainView]}>
             {/* Input Label */}
@@ -43,8 +43,11 @@ export const CommonTextInput = (props: Props) => {
                     placeholder={props.placeholder}
                     value={props.value}
                     style={[styles.inputTextStyle, props.style?.InputTextStyle]}
-                    onChangeText={props.onChange || (() => { })}
+                    onChangeText={(text)=>{
+                        props.onChange(text)
+                         setText(text)} }
                     returnKeyType="next"
+                   
                     secureTextEntry={props.secureTextEntry ? !showPassword : false}
                 />
 

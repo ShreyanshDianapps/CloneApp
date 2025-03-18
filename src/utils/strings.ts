@@ -31,7 +31,17 @@ export default
     discard:'Discard',
     apply:'Apply',
     sortBy:'Sort By',
-
+    addToCart:'ADD TO CART',
+    shippingInfo:'Shipping info',
+    additionalInformation:'Additional Information',
+    rating:'Rating',
+    addReview:'Add Review',
+    RatingsAndRevies:'Ratings And Reviews',
+    writeAReview:'Write a review',
+    whatIsYourRate:'What is you rate?',
+    pleaseShareYourOpinion:'Please share your opinion about the product',
+    yourReview:'Your Review',
+    sendReview:'SEND REVIEW'
 
 
 };

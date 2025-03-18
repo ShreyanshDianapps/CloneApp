@@ -17,6 +17,7 @@ import fonts from '@cloneApp/utils/fonts';
 import strings from '@cloneApp/utils/strings';
 import { dropDownSortArray } from '@cloneApp/utils/comonConstraints';
 import { screenNames } from '@cloneApp/utils/screenNames';
+import RatingComp from '../components/RatingComp';
 
 
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
@@ -25,17 +26,7 @@ type Props = {
     navigation: NativeStackNavigationProp<RootNavigationStack, 'SelectedCategoryProductScreen'>;
 };
 
-export const RatingComp = ({ rating }: { rating: number }) => {
-    return (
-        <View style={styles.ratingCompRateingView}>
-            {Array.from({ length: 5 }, (_, i) => (
-                <View key={i}>
-                    {i < rating ? <FilledStarIcon /> : <EmptyStarIcon />}
-                </View>
-            ))}
-        </View>
-    );
-};
+
 //bottom sheet componet
 
 
@@ -146,7 +137,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
                             <HeartIcon />
                         </Pressable>
                         <View style={styles.ratingView}>
-                            <RatingComp rating={item.rating} />
+                           <RatingComp rating ={item.rating|| 0}/>
                             <Text style={styles.reviewTextStyle}>({item.reviews.length})</Text>
                         </View>
                         <Text style={styles.titleTextStyle}>{item.title}</Text>

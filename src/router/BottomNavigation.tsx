@@ -19,6 +19,7 @@ const hideBottomTab = (route:Partial<Route<string>>)=>{
       screenNames.FilterScreen,
       screenNames.BrandsScreen,
       screenNames.BottomSheetSortScreen,
+      screenNames.AdditionalInformation
     ];
     return !hideOnScreens.includes(routeName);
 };

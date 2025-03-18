@@ -19,5 +19,7 @@ export const screenNames = {
     BrandsScreen:'BrandsScreen',
     BottomSheetSortScreen:'BottomSheetSortScreen',
     ProductScreen:'ProductScreen',
+    AdditionalInformation:'AdditionalInformation',
+    BottomSheetReviwComp:'BottomSheetReviwComp'
 } as const;
 export type ScreenNames = keyof typeof screenNames

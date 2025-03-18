@@ -15,6 +15,8 @@ import BottomSheetDropDownIcon from '@cloneApp/assets/images/svg/BottomSheetSort
 import DollarIcon from '@cloneApp/assets/images/svg/DollarSvg.svg';
 import SearchIcon from '@cloneApp/assets/images/svg/SearchIcon.svg';
 import TickIcon from '@cloneApp/assets/images/svg/TickIcon.svg';
+import CrossIconSvg from '@cloneApp/assets/images/svg/CrossIcon.svg'
+import WriteReview from '@cloneApp/assets/images/svg/WriteReview.svg'
 
 export {
     FordwardIcon,
@@ -35,6 +37,8 @@ export {
     DollarIcon,
     SearchIcon,
     TickIcon,
+    CrossIconSvg,
+    WriteReview
 
 
 };
