@@ -1,5 +1,5 @@
 import { Product } from '@cloneApp/modals';
-import { NavigatorScreenParams } from '@react-navigation/native';
+// import { NavigatorScreenParams } from '@react-navigation/native';
 export type AuthNavigationStack={
     SignUp:undefined,
     Login:undefined

@@ -12,7 +12,7 @@ export const BagRouter = () => {
   return (
     <Bag.Navigator screenOptions={{ headerShown: false }}>
      <Bag.Screen name={screenNames.MyBagScreen} component={MyBagScreen}/>
-    
+
     </Bag.Navigator>
   );
 };

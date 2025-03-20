@@ -23,6 +23,6 @@ export const screenNames = {
     BottomSheetReviwComp:'BottomSheetReviwComp',
     //bag screens
     BagRouter:'BagRouter',
-    MyBagScreen:'MyBagScreen'
+    MyBagScreen:'MyBagScreen',
 } as const;
 export type ScreenNames = keyof typeof screenNames

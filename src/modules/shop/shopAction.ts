@@ -43,7 +43,7 @@ export const getProductById = createAsyncThunk(
         }
     }
 );
-export const storeReviews=createAsyncThunk(
+export const storeReviews = createAsyncThunk(
     'shop/storeRevies',
     async(payload:Review,{rejectWithValue})=>{
         try{
@@ -55,16 +55,16 @@ export const storeReviews=createAsyncThunk(
             reviewRef.onSnapshot(async (snapshot) => {
                 if (snapshot.exists) {
                     await reviewRef.update(payload);
-                    return ;
-                } 
+                    return;
+                }
                 await reviewRef.set(payload);
-                return ;
+                return;
               });
         }catch(error){
-            return rejectWithValue
+            return rejectWithValue;
         }
     }
-)
+);
 export const checkingReview = createAsyncThunk<Review | null, Users>(
     'shop/checkingReview',
     async (payload, { rejectWithValue }) => {
@@ -74,7 +74,7 @@ export const checkingReview = createAsyncThunk<Review | null, Users>(
           .doc(payload.userId)
           .collection('reviews')
           .doc(payload.productId.toString());
-  
+
         const snapshot = await reviewRef.get();
         if (snapshot.exists) {
           return snapshot.data() as Review;
@@ -93,15 +93,15 @@ export const checkingReview = createAsyncThunk<Review | null, Users>(
         const addCartRef = firestore()
           .collection('users')
           .doc(payload.userId)
-          .collection('mybag')
+          .collection('mybag');
           await addCartRef.add(payload);
-        
-        return payload; 
+
+        return payload;
       } catch (error: any) {
         return rejectWithValue(error.message);
       }
     }
   );
-  
 
-  
+
+

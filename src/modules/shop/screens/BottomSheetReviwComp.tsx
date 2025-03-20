@@ -1,10 +1,9 @@
-import { 
-  Animated, 
-  Pressable, 
-  StyleSheet, 
-  Text, 
-  View, 
-  Keyboard 
+import {
+  Animated,
+  Pressable,
+  StyleSheet,
+  Text,
+  Keyboard,
 } from 'react-native';
 import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -18,12 +17,11 @@ import { Portal } from '@gorhom/portal';
 import { CommonButton } from '@cloneApp/components/CommonButton';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootNavigationStack, ShopNavigationStack } from '@cloneApp/utils/type';
-import { TextInput } from 'react-native-gesture-handler';
 import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
 import { Review } from '@cloneApp/modals';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { checkingReview, storeReviews, Users } from '../shopAction';
-import { debounce } from '@cloneApp/utils/sign_in';
+
 
 type Props = {
   navigation: NativeStackNavigationProp<RootNavigationStack, 'BottomSheetReviwComp'>;
@@ -33,30 +31,30 @@ export const BottomSheetReviwComp = (props: Props) => {
   const [text, setText] = useState('');
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const opacity = useRef(new Animated.Value(1)).current;
-  const {user}=useAppSelector((state)=>state.auth)
-  const [ratings,setRatings]=useState(0);
-  const [buttonText,setButtonText]=useState(strings.sendReview)
-  const dispatch =useAppDispatch();
-  const route=useRoute<RouteProp<ShopNavigationStack,'BottomSheetReviwComp'>>();
-  const {data}=route.params
+  const {user} = useAppSelector((state)=>state.auth);
+  const [ratings,setRatings] = useState(0);
+  const [buttonText,setButtonText] = useState(strings.sendReview);
+  const dispatch = useAppDispatch();
+  const route = useRoute<RouteProp<ShopNavigationStack,'BottomSheetReviwComp'>>();
+  const {data} = route.params;
 
   // Memoized snap points to avoid unnecessary re-renders
-  console.log("First Rendert")
+  console.log('First Rendert');
   const snapPoints = useMemo(() => [540 + keyboardHeight], [keyboardHeight]);
 
   useEffect(()=>{
-const payload:Users={
-  userId:user?.userId??"",
-  productId:data?.id??""
-}
+const payload:Users = {
+  userId:user?.userId ?? '',
+  productId:data?.id ?? '',
+};
 dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
   if(res){
     setRatings(res.ratings);
     // setText(res.comment);
-    setButtonText(strings.updateReview)
+    setButtonText(strings.updateReview);
   }
-})
-  },[dispatch,user])
+});
+  },[dispatch,user]);
 
   // Keyboard Listeners
   useEffect(() => {
@@ -76,12 +74,12 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
 
   // Handle Close Animation
   const handleClose = useCallback(() => {
-    console.log("Helli i am pen down")
+    console.log('Helli i am pen down');
     Keyboard.dismiss();
     Animated.timing(opacity, {
       toValue: 0,
       duration: 100,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start(() => {
       props.navigation.goBack();
     });
@@ -92,7 +90,7 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
     <Pressable onPress={handleClose} style={{ flex: 1 }}>
       <Portal>
         <BottomSheet
-     
+
           backgroundStyle={styles.bottomSheetStyle}
           enableDynamicSizing={false}
           enablePanDownToClose={true}
@@ -101,7 +99,7 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
           onClose={handleClose}
         >
           <Text style={styles.headingText}>{strings.whatIsYourRate}</Text>
-          <RatingStarComponent starWidth={36} sendRatings={(rating)=>{setRatings(rating)}} style={{ mainStyle: styles.ratingView }} rating={ratings} />
+          <RatingStarComponent starWidth={36} sendRatings={(rating)=>{setRatings(rating);}} style={{ mainStyle: styles.ratingView }} rating={ratings} />
           <Text style={styles.thoughtText}>{strings.pleaseShareYourOpinion}</Text>
           <CommonTextInput
             placeholder={strings.yourReview}
@@ -109,23 +107,23 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
             onChange={setText}
             style={{
               mainViewInput: styles.textInput,
-              InputTextStyle: styles.textTextInput
+              InputTextStyle: styles.textTextInput,
             }}
           />
           <CommonButton
             text={buttonText}
             onPress={() => {
-              const payload:Review={
-                  userId:user?.userId?? " ",
+              const payload:Review = {
+                  userId:user?.userId ?? ' ',
                   ratings:ratings,
                   comment:text,
-                  Product:data
-              }
-              dispatch(storeReviews(payload))
+                  Product:data,
+              };
+              dispatch(storeReviews(payload));
             }}
             style={{
               mainView: styles.buttonMainView,
-              InputTextStyle: styles.buttonTextStyle
+              InputTextStyle: styles.buttonTextStyle,
             }}
           />
         </BottomSheet>
@@ -138,23 +136,23 @@ const styles = StyleSheet.create({
   bottomSheetStyle: {
     backgroundColor: color.Netual_White_Light,
     borderTopRightRadius: normalize(60),
-    borderTopLeftRadius: normalize(60)
+    borderTopLeftRadius: normalize(60),
   },
   indicatorStyle: {
     width: vw(60),
     height: vh(6),
     backgroundColor: color.Gray3,
-    marginBottom: vh(16)
+    marginBottom: vh(16),
   },
   headingText: {
     fontSize: normalize(18),
     alignSelf: 'center',
     fontFamily: fonts.RobotoSemiBold,
-    marginBottom: vh(17)
+    marginBottom: vh(17),
   },
   ratingView: {
     alignSelf: 'center',
-    marginBottom: vh(34)
+    marginBottom: vh(34),
   },
   thoughtText: {
     width: vw(227),
@@ -162,7 +160,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: normalize(18),
     fontFamily: fonts.RobotoSemiBold,
-    marginBottom: vh(18)
+    marginBottom: vh(18),
   },
   textInput: {
     width: vw(327),
@@ -172,15 +170,15 @@ const styles = StyleSheet.create({
     padding: normalize(12),
     shadowOffset: {
       height: 3,
-      width: 0
+      width: 0,
     },
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    elevation: 5
+    elevation: 5,
   },
   textTextInput: {
     fontSize: normalize(14),
-    fontFamily: fonts.RobotoMedium
+    fontFamily: fonts.RobotoMedium,
   },
   buttonMainView: {
     marginTop: vh(35),
@@ -194,6 +192,6 @@ const styles = StyleSheet.create({
   buttonTextStyle: {
     fontSize: normalize(14),
     fontFamily: fonts.RobotoMedium,
-    color: color.Netual_White_Light
-  }
+    color: color.Netual_White_Light,
+  },
 });

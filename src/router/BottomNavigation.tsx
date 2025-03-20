@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { StyleSheet, View,Image } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { screenNames } from '../utils/screenNames';
 import { HomeRouter } from './HomeRouter';
 import { BottomNavigationStack } from '../utils/type';
@@ -11,8 +11,7 @@ import { vh, vw } from '../utils/dimensions';
 // import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 import { BagIcon, HomeTabIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
 import { ShopRouter } from './ShopRouter';
-import localPngImages from '@cloneApp/utils/localPngImages';
-import color from '@cloneApp/utils/color';
+
 import { BagRouter } from './BagRouter';
 
 const Bottom = createBottomTabNavigator<BottomNavigationStack>();
@@ -22,7 +21,7 @@ const hideBottomTab = (route:Partial<Route<string>>)=>{
       screenNames.FilterScreen,
       screenNames.BrandsScreen,
       screenNames.BottomSheetSortScreen,
-      screenNames.AdditionalInformation
+      screenNames.AdditionalInformation,
     ];
     return !hideOnScreens.includes(routeName);
 };

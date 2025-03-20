@@ -15,12 +15,12 @@ import BottomSheetDropDownIcon from '@cloneApp/assets/images/svg/BottomSheetSort
 import DollarIcon from '@cloneApp/assets/images/svg/DollarSvg.svg';
 import SearchIcon from '@cloneApp/assets/images/svg/SearchIcon.svg';
 import TickIcon from '@cloneApp/assets/images/svg/TickIcon.svg';
-import CrossIconSvg from '@cloneApp/assets/images/svg/CrossIcon.svg'
-import WriteReview from '@cloneApp/assets/images/svg/WriteReview.svg'
-import BagIcon from '@cloneApp/assets/images/svg/BagICon.svg'
-import OptionsICon from '@cloneApp/assets/images/svg/Options.svg'
-import MinusIcon from '@cloneApp/assets/images/svg/Add.svg'
-import PlusIcon from '@cloneApp/assets/images/svg/Minus.svg'
+import CrossIconSvg from '@cloneApp/assets/images/svg/CrossIcon.svg';
+import WriteReview from '@cloneApp/assets/images/svg/WriteReview.svg';
+import BagIcon from '@cloneApp/assets/images/svg/BagICon.svg';
+import OptionsICon from '@cloneApp/assets/images/svg/Options.svg';
+import MinusIcon from '@cloneApp/assets/images/svg/Add.svg';
+import PlusIcon from '@cloneApp/assets/images/svg/Minus.svg';
 
 export {
     FordwardIcon,
@@ -46,7 +46,7 @@ export {
     BagIcon,
     OptionsICon,
     MinusIcon,
-    PlusIcon
+    PlusIcon,
 
 
 };

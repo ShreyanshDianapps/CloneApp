@@ -23,7 +23,7 @@ type Props = {
         <Pressable
         onPress={()=>{
             if(props.isBackIconPressed){
-                props.isBackIconPressed(true)
+                props.isBackIconPressed(true);
             }
            }}
         style={styles.backicon}>  {props.backIcon && <props.backIcon />}</Pressable>

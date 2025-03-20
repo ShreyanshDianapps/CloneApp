@@ -58,7 +58,7 @@ GoogleSignin.configure(
     delay: number
   ) => {
     let timeoutId: NodeJS.Timeout;
-  
+
     return (...args: Parameters<T>) => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {

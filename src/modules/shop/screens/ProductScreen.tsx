@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { HeadingCompnent } from '../components/HeadingCompnent';
 import { RouteProp, useRoute } from '@react-navigation/native';
@@ -18,7 +18,7 @@ import RatingComp from '../components/RatingComp';
 import { CommonButton } from '@cloneApp/components/CommonButton';
 import { screenNames } from '@cloneApp/utils/screenNames';
 import { AddProduct, Product } from '@cloneApp/modals';
-import localPngImages from '@cloneApp/utils/localPngImages';
+
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 type ImagePopUpProps = {
     image: string;
@@ -27,16 +27,16 @@ type ImagePopUpProps = {
 const ImagePopUp = (props: ImagePopUpProps) => {
     return (
         <View style={styles.ImagePopUpMainView}>
-            <ImageBackground source={{ uri: props.image }} style={styles.fullImageStyle}></ImageBackground>
+            <ImageBackground source={{ uri: props.image }} style={styles.fullImageStyle} />
             <Pressable style={styles.crossicon} onPress={() => {
-                props.closeDropDown(false)
+                props.closeDropDown(false);
             }}>
                 <CrossIconSvg height={vh(20)} width={vw(20)} />
             </Pressable>
         </View>
-    )
+    );
 
-}
+};
 type Props = {
     navigation: NativeStackNavigationProp<RootNavigationStack, 'ProductScreen'>;
 }
@@ -52,43 +52,43 @@ export const ProductScreen = (props: Props) => {
     const { ProductData, loading, BagData,Product } = useAppSelector((state) => state.shop);
     const { user } = useAppSelector((state) => state.auth);
     const [imageDropDown, setImageDropDown] = useState(false);
-    const [similarProducts,setSimilarProducts]=useState<Product[]>([]);
+    const [similarProducts,setSimilarProducts] = useState<Product[]>([]);
     const [image, setImage] = useState('');
-    const activeIndexRef = useRef(0);;
+    const activeIndexRef = useRef(0);
     const [, forceRender] = useState(false);
     const flatlistref = useRef<FlatList>(null);
     const { id } = route.params;
-    const [buttonText, setButtonText] = useState(strings.addToCart)
+    const [buttonText, setButtonText] = useState(strings.addToCart);
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(getProductById(id));
-    
+
         // Check if product is in the bag
         const isProductInBag = BagData.some(item => item.Product.id === ProductData?.id);
         if (isProductInBag) {
             setButtonText(strings.alreadyInBag);
         }
-    
+
         // Find similar products based on matching tags
         if (ProductData?.tags && Array.isArray(Product)) {
-            const similarProducts = Product.filter(item => 
+            const similarProducts = Product.filter(item =>
                 item.tags?.some(tag => ProductData.tags.includes(tag)) // Check if any tag matches
             );
             setSimilarProducts(similarProducts);
         }
-    
+
     }, [id]); // Include ProductData in dependencies
-    
+
     const handleImagePress = (item: string) => {
         setImageDropDown(true);
-        setImage(item)
-    }
+        setImage(item);
+    };
     const handleAddToCart = useCallback(() => {
         if (user?.userId && ProductData && !loading) {
             const payload: AddProduct = {
                 userId: user?.userId,
                 Product: ProductData,
-                quantity: 1
+                quantity: 1,
             };
 
             dispatch(addToCart(payload));
@@ -101,7 +101,7 @@ export const ProductScreen = (props: Props) => {
             if (lastVisibleItem.index !== null && activeIndexRef.current !== lastVisibleItem.index) {
                 activeIndexRef.current = lastVisibleItem.index;
                 forceRender((prev) => !prev); // This will force re-render of `renderMiniImage`
-                console.log("Updated Active Index:", lastVisibleItem.index);
+                console.log('Updated Active Index:', lastVisibleItem.index);
             }
         }
     }, []);
@@ -139,7 +139,7 @@ export const ProductScreen = (props: Props) => {
                             <HeartIcon />
                         </Pressable>
                         <View style={styles.ratingViewList}>
-                           <RatingComp rating ={item.rating|| 0}/>
+                           <RatingComp rating ={item.rating || 0}/>
                             <Text style={styles.reviewTextStyle}>({item.reviews.length})</Text>
                         </View>
                         <Text style={styles.titleTextStyle}>{item.title}</Text>
@@ -193,8 +193,8 @@ export const ProductScreen = (props: Props) => {
                             source={localPngImages.HeartIconShape}
                             style={{ height: vh(13), width: vw(13)}  }
                         /> */}
-                        <HeartIcon style={{backgroundColor:'red'}}/>
-                        
+                        <HeartIcon />
+
                     </Pressable>
                 </View>
 
@@ -211,11 +211,11 @@ export const ProductScreen = (props: Props) => {
                 <CommonButton text={buttonText} onPress={handleAddToCart}
                     style={{
                         mainView: styles.addtocartBuutton,
-                        InputTextStyle: styles.cartTextStyle
+                        InputTextStyle: styles.cartTextStyle,
                     }} />
                 <Pressable style={styles.shippingInfoStyle} onPress={() => {
                     if (ProductData)
-                        props.navigation.navigate(screenNames.AdditionalInformation, { data: ProductData })
+                        {props.navigation.navigate(screenNames.AdditionalInformation, { data: ProductData });}
                 }
                 }>
                     <Text>{strings.shippingInfo}</Text>
@@ -225,7 +225,7 @@ export const ProductScreen = (props: Props) => {
                 </Pressable>
                 <View style={styles.similarItemTextView}>
                     <Text>{strings.youCanAlsoLikeThis}</Text>
-                    <Text>{similarProducts.length+ strings.items}</Text>
+                    <Text>{similarProducts.length + strings.items}</Text>
                 </View>
                 <FlatList
                 contentContainerStyle={styles.similarlistStyle}
@@ -236,7 +236,7 @@ export const ProductScreen = (props: Props) => {
                 />
             </ScrollView>
             {imageDropDown && <ImagePopUp image={image} closeDropDown={(value) => {
-                setImageDropDown(value)
+                setImageDropDown(value);
             }} />}
         </View>
     );
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
             alignItems: 'center',
         },
     ratingView: {
-        marginLeft: vw(16)
+        marginLeft: vw(16),
     },
     ImagePopUpMainView: {
         position: 'absolute',
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     },
     fullImageStyle: {
         height: vh(500),
-        width: vw(300)
+        width: vw(300),
     },
     crossicon: {
         position: 'absolute',
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
         borderRadius: normalize(15),
         backgroundColor: 'rgba(0,0,0,0.3)',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     addtocartBuutton: {
         width: vw(343),
@@ -344,17 +344,17 @@ const styles = StyleSheet.create({
         backgroundColor: color.PrimaryRed,
         shadowOffset: {
             height: 4,
-            width: 0
+            width: 0,
         },
         shadowOpacity: 0.5,
         shadowRadius: 5,
         elevation: 5,
-        marginBottom: vh(10)
+        marginBottom: vh(10),
     },
     cartTextStyle: {
         fontSize: normalize(14),
         fontFamily: fonts.RobotoMedium,
-        color: color.Netual_White_Light
+        color: color.Netual_White_Light,
     },
     shippingInfoStyle: {
         alignItems: 'center',
@@ -364,13 +364,13 @@ const styles = StyleSheet.create({
         width: screenWidth,
         alignSelf: 'center',
         backgroundColor: color.Neutral_White,
-        paddingHorizontal: vw(20)
+        paddingHorizontal: vw(20),
     },
     similarItemTextView:{
         flexDirection:'row',
         justifyContent:'space-between',
         marginHorizontal:vw(16),
-        marginTop:vh(10)
+        marginTop:vh(10),
     },
     mainListComp: {
         marginEnd: vw(20),
@@ -407,7 +407,7 @@ const styles = StyleSheet.create({
                 gap:normalize(3),
                 width:'80%',
         },
-        
+
         ratingCompRateingView:{
             gap:normalize(2),
             flexDirection:'row',
@@ -450,6 +450,6 @@ const styles = StyleSheet.create({
         },
         similarlistStyle:{
             marginVertical:vh(20),
-            marginHorizontal:vw(20)
-        }
+            marginHorizontal:vw(20),
+        },
 });

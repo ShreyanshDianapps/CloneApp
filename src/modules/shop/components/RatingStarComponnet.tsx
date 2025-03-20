@@ -1,11 +1,11 @@
-import { 
-    StyleSheet, 
-    View, 
-    TouchableOpacity, 
-    Image, 
-    GestureResponderEvent, 
-    StyleProp, 
-    ViewStyle 
+import {
+    StyleSheet,
+    View,
+    TouchableOpacity,
+    Image,
+    GestureResponderEvent,
+    StyleProp,
+    ViewStyle,
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 // Utils import
@@ -33,7 +33,7 @@ export const RatingStarComponent = (props: Props) => {
     const handlePress = (index: number, event: GestureResponderEvent) => {
         const { locationX } = event.nativeEvent;
         const newRating = locationX < starWidth / 2 ? index + 0.5 : index + 1;
-        
+
         setCurrentRating(newRating);
         sendRatings?.(newRating);
     };
@@ -45,14 +45,14 @@ export const RatingStarComponent = (props: Props) => {
                 const isHalf = currentRating === index + 0.5;
 
                 return (
-                    <TouchableOpacity 
-                        key={index} 
-                        onPress={(event) => handlePress(index, event)} 
+                    <TouchableOpacity
+                        key={index}
+                        onPress={(event) => handlePress(index, event)}
                         style={styles.starContainer}
                     >
-                        <Image 
-                            source={isFull ? localPngImages.FullStarIcon : localPngImages.EmptyStarIcon} 
-                            style={styles.starIcon} 
+                        <Image
+                            source={isFull ? localPngImages.FullStarIcon : localPngImages.EmptyStarIcon}
+                            style={styles.starIcon}
                         />
                         {isHalf && (
                             <View style={styles.halfStarOverlay}>

@@ -1,7 +1,7 @@
 import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import { HeadingCompnent } from '../components/HeadingCompnent';
-import { BottomSheetDropDownIcon, EmptyStarIcon, FilledStarIcon, FilterIcon, HeartIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
+import { BottomSheetDropDownIcon, FilterIcon, HeartIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootNavigationStack, ShopNavigationStack } from '@cloneApp/utils/type';
 import { FlatList } from 'react-native-gesture-handler';
@@ -137,7 +137,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
                             <HeartIcon />
                         </Pressable>
                         <View style={styles.ratingView}>
-                           <RatingComp rating ={item.rating|| 0}/>
+                           <RatingComp rating ={item.rating || 0}/>
                             <Text style={styles.reviewTextStyle}>({item.reviews.length})</Text>
                         </View>
                         <Text style={styles.titleTextStyle}>{item.title}</Text>

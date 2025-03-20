@@ -1,7 +1,7 @@
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native'
-import React from 'react'
-import { EmptyStarIcon, FilledStarIcon } from '@cloneApp/utils/localsvg'
-import { normalize } from '@cloneApp/utils/dimensions'
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import React from 'react';
+import { EmptyStarIcon, FilledStarIcon } from '@cloneApp/utils/localsvg';
+import { normalize } from '@cloneApp/utils/dimensions';
 
 type Props = {
     rating:number
@@ -13,7 +13,7 @@ type Props = {
 
  const RatingComp = (props: Props) => {
   return (
-    
+
       <View style={[styles.ratingCompRateingView,props.style?.mainStyle]}>
             {Array.from({ length: 5 }, (_, i) => (
                 <View key={i}>
@@ -21,13 +21,13 @@ type Props = {
                 </View>
             ))}
         </View>
-   
-  )
-}
-export default RatingComp
+
+  );
+};
+export default RatingComp;
 const styles = StyleSheet.create({
     ratingCompRateingView:{
             gap:normalize(2),
             flexDirection:'row',
         },
-})
+});

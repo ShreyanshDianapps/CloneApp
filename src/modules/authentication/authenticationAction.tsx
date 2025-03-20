@@ -43,12 +43,6 @@ export const googleSignupAndLoginAction = createAsyncThunk(
     'auth/googleSignupAndLogin',
     async(payload:userState,{rejectWithValue})=>{
                 try{
-                  const userQuery = await firestore()
-                  .collection('users')
-                  .where('email', '==', payload.email)
-                  .get();
-          
-                
                 await firestore().collection('users').doc(payload.userId).set({
                   name: payload.name,
                   email: payload.email,

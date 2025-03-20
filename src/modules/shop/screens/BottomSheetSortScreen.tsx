@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View,Pressable } from 'react-native';
+import { StyleSheet, Text,Pressable } from 'react-native';
 import React,{useRef,useState} from 'react';
-import { Portal } from '@gorhom/portal';
+
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootNavigationStack, ShopNavigationStack } from '@cloneApp/utils/type';

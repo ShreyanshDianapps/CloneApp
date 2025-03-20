@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View ,Pressable,ImageBackground} from 'react-native'
-import { PlusIcon,MinusIcon,OptionsICon } from '@cloneApp/utils/localsvg'
-import React from 'react'
-import { AddProduct } from '@cloneApp/modals'
-import strings from '@cloneApp/utils/strings'
-import { vh,normalize,vw } from '@cloneApp/utils/dimensions'
-import fonts from '@cloneApp/utils/fonts'
-import color from '@cloneApp/utils/color'
-import { debounce } from '@cloneApp/utils/sign_in'
+import { StyleSheet, Text, View ,Pressable,ImageBackground} from 'react-native';
+import { PlusIcon,MinusIcon,OptionsICon } from '@cloneApp/utils/localsvg';
+import React from 'react';
+import { AddProduct } from '@cloneApp/modals';
+import strings from '@cloneApp/utils/strings';
+import { vh,normalize,vw } from '@cloneApp/utils/dimensions';
+import fonts from '@cloneApp/utils/fonts';
+import color from '@cloneApp/utils/color';
+import { debounce } from '@cloneApp/utils/sign_in';
 
 type Props={
     data:AddProduct,
@@ -14,15 +14,15 @@ type Props={
 }
 
 const RenderMyBag = (props: Props) => {
-    const [quantity,setQuantity]=React.useState(props.data.quantity);
-    const handleQualityChange=(change:number)=>{
+    const [quantity,setQuantity] = React.useState(props.data.quantity);
+    const handleQualityChange = (change:number)=>{
         const debouncedSendQuantity = debounce((change: number) => {
             props.sendQunatityBack(change);
           }, 4000);
-          
+
           // Call it when needed
           debouncedSendQuantity(change);
-    }
+    };
   return (
     <View style={styles.myBagCard}>
         <ImageBackground source={{ uri:props.data.Product.thumbnail }} style={styles.imageStyle} resizeMode="contain">
@@ -38,9 +38,9 @@ const RenderMyBag = (props: Props) => {
             <View style={styles.adjustquantity}>
               <Pressable
                 onPress={() => {
-                   setQuantity(quantity+1);
-                   handleQualityChange(quantity+1)
-                 
+                   setQuantity(quantity + 1);
+                   handleQualityChange(quantity + 1);
+
                 }}
                 style={styles.minus}
               >
@@ -49,9 +49,9 @@ const RenderMyBag = (props: Props) => {
               <Text>{quantity}</Text>
               <Pressable
                 onPress={() => {
-                   
-                    setQuantity(quantity-1);
-                    handleQualityChange(quantity+1)
+
+                    setQuantity(quantity - 1);
+                    handleQualityChange(quantity + 1);
                 }}
                 style={styles.minus}
               >
@@ -62,16 +62,16 @@ const RenderMyBag = (props: Props) => {
           </View>
         </View>
       </View>
-  )
-}
+  );
+};
 
-export default RenderMyBag
+export default RenderMyBag;
 
 const styles = StyleSheet.create({
      myBagStyle:{
             flexDirection:'row',
           fontSize:normalize(34),
-          fontFamily:fonts.RobotoBold
+          fontFamily:fonts.RobotoBold,
       },
           myBagCard:{
             width:vw(343),
@@ -84,16 +84,16 @@ const styles = StyleSheet.create({
           shadowOpacity:0.5,
           shadowRadius:5,
           elevation:5,
-          
+
       },
           imageStyle:{
             width:vw(104),
-          height:vh(104)
+          height:vh(104),
       },
           itemDataView:{
             width:vw(239),
           height:vh(104),
-          backgroundColor:color.Neutral_White
+          backgroundColor:color.Neutral_White,
       },
           overlay:{
             position:'absolute',
@@ -102,27 +102,27 @@ const styles = StyleSheet.create({
           top:0,
           left:0,
           right:0,
-          bottom:0
+          bottom:0,
       },
           titleText:{
             marginLeft:vw(5),
           fontSize:normalize(13),
           fontFamily:fonts.RobotoRegular,
           marginTop:vh(5),
-          width:vw(190)
+          width:vw(190),
       },
           optionsStyle:{
             position:'absolute',
           alignSelf:'flex-end',
           right:vw(20),
-          marginTop:vh(8)
+          marginTop:vh(8),
       },
           adjustquantity:{
             flexDirection:'row',
           gap:normalize(8),
           alignItems:'center',
           marginLeft:vw(5),
-          marginTop:vh(10)
+          marginTop:vh(10),
       },
           minus:{
             height:vh(36),
@@ -133,22 +133,22 @@ const styles = StyleSheet.create({
           alignItems:'center',
           shadowOffset:{
             height:3,
-          width:0
+          width:0,
         },
           shadowOpacity:0.5,
           shadowRadius:5,
-          elevation:5
+          elevation:5,
       },
       price_quantity:{
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
-       marginRight:vw(13)
+       marginRight:vw(13),
       },
       priceText:{
         fontSize:normalize(16),
         fontFamily:fonts.RobotoBold,
         alignSelf:'center',
-        marginTop:vh(10)
+        marginTop:vh(10),
       },
-})
+});

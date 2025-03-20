@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { HeadingCompnent } from '../components/HeadingCompnent';
 import strings from '@cloneApp/utils/strings';
-import { DollarIcon, FilledStarIcon, FordwardIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
+import { DollarIcon, FilledStarIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import color from '@cloneApp/utils/color';
 import { normalize, screenWidth, vh, vw } from '@cloneApp/utils/dimensions';
@@ -61,7 +61,7 @@ const CustomSlider = (props: CustomSliderProps) => {
 
             props.sendValue(values);
           }}
-          customMarker={(e) => <CustomMarker
+          customMarker={() => <CustomMarker
           />}
         />
       </View>

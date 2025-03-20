@@ -48,7 +48,7 @@ export default
     youCanAlsoLikeThis:'You can also like this',
     myBag:'My Bag',
     totalAmount:'Total Amount',
-    checkOut:'CHECK OUT'
+    checkOut:'CHECK OUT',
 
 
 };

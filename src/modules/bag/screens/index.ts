@@ -1,1 +1,1 @@
-export * from './MyBagScreen'
+export * from './MyBagScreen';

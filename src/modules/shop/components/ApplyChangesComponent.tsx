@@ -1,10 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import { Portal } from '@gorhom/portal';
 import { CommonButton } from '@cloneApp/components/CommonButton';
 import strings from '@cloneApp/utils/strings';
-import { normalize, screenHeight, screenWidth, vh, vw } from '@cloneApp/utils/dimensions';
-import BottomSheet from '@gorhom/bottom-sheet';
+import { normalize,  screenWidth, vh, vw } from '@cloneApp/utils/dimensions';
 import color from '@cloneApp/utils/color';
 import fonts from '@cloneApp/utils/fonts';
 

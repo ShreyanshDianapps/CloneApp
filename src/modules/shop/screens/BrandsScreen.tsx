@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HeadingCompnent } from '../components/HeadingCompnent';
-import { string } from 'yup';
 import strings from '@cloneApp/utils/strings';
 import { NavigationBackIcon, SearchIcon, TickIcon } from '@cloneApp/utils/localsvg';
 import { CommonTextInput } from '@cloneApp/components/CommonTextInput';
