@@ -112,9 +112,31 @@ const initialShopState:ShopState = {
         BagData:[],
 
 };
+interface HomeState{
+    loading:boolean
+    ProductsData:Product[]|[]
+}
 
+const initialHomeState:HomeState = {
+    loading:false,
+    ProductsData:[],
+};
+interface FavoritesState{
+    loading:boolean
+    Favorites:number[]
+    FavoritesData:Product[]
+    Filter: FilteredData|null
+}
+const initialFavoriteState:FavoritesState = {
+    loading:false,
+    Favorites:[],
+    FavoritesData:[],
+    Filter: null,
+};
 export {
     initialAuthState,
     initialShopState,
+    initialHomeState,
+    initialFavoriteState,
 };
 

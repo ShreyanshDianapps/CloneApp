@@ -1,5 +1,4 @@
 
-
 export const screenNames = {
 
     //Authentication Screens
@@ -24,5 +23,9 @@ export const screenNames = {
     //bag screens
     BagRouter:'BagRouter',
     MyBagScreen:'MyBagScreen',
+    FavoriteRouter:'FavoriteRouter',
+    MainFavorites:'MainFavorites',
+    //harsh
+    HarshUi:'HarshUi',
 } as const;
 export type ScreenNames = keyof typeof screenNames

@@ -1,12 +1,12 @@
-import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
-import { HeadingCompnent } from '../components/HeadingCompnent';
+import { useFocusEffect } from '@react-navigation/native';
+
 import { BottomSheetDropDownIcon, FilterIcon, HeartIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { RootNavigationStack, ShopNavigationStack } from '@cloneApp/utils/type';
+
+import { RootNavigationStack } from '@cloneApp/utils/type';
 import { FlatList } from 'react-native-gesture-handler';
 import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
-import { getProductListByCategoryAction } from '../shopAction';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Product } from '@cloneApp/modals';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
@@ -17,41 +17,59 @@ import fonts from '@cloneApp/utils/fonts';
 import strings from '@cloneApp/utils/strings';
 import { dropDownSortArray } from '@cloneApp/utils/comonConstraints';
 import { screenNames } from '@cloneApp/utils/screenNames';
-import { RatingComp } from '../components/RatingComp';
+import { CardComp } from '@cloneApp/modules/home/components/CardComp';
+import { getFavoritesData } from '../favoritesAction';
 
 
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 
 type Props = {
-    navigation: NativeStackNavigationProp<RootNavigationStack, 'SelectedCategoryProductScreen'>;
+    navigation: NativeStackNavigationProp<RootNavigationStack, 'MainFavorites'>;
 };
 
 
 //bottom sheet componet
 
 
-export const SelectedCategoryProductScreen = (props: Props) => {
-    const route = useRoute<RouteProp<ShopNavigationStack, 'SelectedCategoryProductScreen'>>();
-    const { name, url } = route.params;
-    const { loading,Product,Filter } = useAppSelector((state) => state.shop);
+export const MainFavorites = (props: Props) => {
+
+    const {user} = useAppSelector((state)=>state.auth);
+    const {Filter} = useAppSelector((state)=>state.shop);
+    const { loading,FavoritesData } = useAppSelector((state) => state.favorite);
     const [productData, setProductData] = useState<Product[]>([]);
     const [tagsArray, setTagsArray] = useState<string[]>([]);
     const [allBrands,setAllBrands] = useState<string[]>([]);
+    const [saved,setIsSaved] = useState(true);
    const [selectedDropDownValue,setSelectedDropDownValue] = useState(0);
     const dispatch = useAppDispatch();
+    console.log('Hello');
 
-    useEffect(() => {
-        dispatch(getProductListByCategoryAction(url))
+    useFocusEffect(
+      useCallback(() => {
+        if (user) {
+          dispatch(getFavoritesData(user.userId))
             .unwrap()
             .then((res) => {
+              if (res) {
+                console.log(res);
                 setProductData(res);
                 extractTags(res);
                 extractBrands(res);
-            })
-            .catch(() => {
-                props.navigation.goBack();
+              }
             });
-    }, [dispatch, url]);
+        }
+      }, [dispatch, user]) // Ensure dependencies are correct
+
+    );
+    useEffect(()=>{
+        if(user)
+        {dispatch(getFavoritesData(user.userId)).unwrap().then((res)=>{
+    if(res){
+        setProductData(FavoritesData);
+    }
+        });}
+
+    },[saved,user]);
     useEffect(() => {
         if (Filter && productData.length > 0) {
           const filteredData = productData.filter(
@@ -104,7 +122,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
 
     };
     const handleSelectedTagData = (item: string) => {
-        const filterddata = Product.filter((product) => product.tags.includes(item));
+        const filterddata = FavoritesData.filter((product) => product.tags.includes(item));
         if(filterddata.length > 0){
             setProductData(filterddata);
         }
@@ -123,48 +141,12 @@ export const SelectedCategoryProductScreen = (props: Props) => {
         </Pressable>
     ), [loading,productData,handleSelectedTagData]);
 
-    const renderCards = useCallback(({ item }: { item: Product }) => (
-        <Pressable style={styles.mainListComp} onPress={()=>props.navigation.navigate(screenNames.ProductScreen,{id:item.id})}>
-            {loading ? (
-                <ShimmerPlaceHolder style={styles.shimmerPlaceHolderImageView} />
-            ) : (
-                <View>
-                    <ImageBackground source={{ uri: item.thumbnail }} style={styles.shimmerPlaceHolderImageView}>
-                        <View style={styles.overlayView} />
-                    </ImageBackground>
-                    <View>
-                        <Pressable style={styles.saveView}>
-                            <HeartIcon />
-                        </Pressable>
-                        <View style={styles.ratingView}>
-                           <RatingComp rating ={item.rating || 0}/>
-                            <Text style={styles.reviewTextStyle}>({item.reviews.length})</Text>
-                        </View>
-                        <Text style={styles.titleTextStyle}>{item.title}</Text>
-                        <Text style={styles.brandTextStyle}>{item.brand}</Text>
-                        <View style={styles.priceView}>
-                            <Text style={[item.discountPercentage === 0 ? styles.finalPriceText : styles.oldPrice]}>
-                                {strings.dollar + item.price}
-                            </Text>
-                            {item.discountPercentage > 0 && (
-                                <Text style={styles.newPrice}>
-                                    {strings.dollar + (item.price - (item.price * item.discountPercentage) / 100).toFixed(2)}
-                                </Text>
-                            )}
-                        </View>
-                    </View>
-                </View>
-            )}
-        </Pressable>
-    ), [loading]);
+
+
 
     return (
-        <View>
-            <HeadingCompnent
-                text={name}
-                backIcon={NavigationBackIcon}
-                isBackIconPressed={() => props.navigation.goBack()}
-            />
+        <SafeAreaView>
+            <Text style={styles.favoritesText}>{strings.Favorites}</Text>
             <FlatList
                 data={tagsArray}
                 keyExtractor={(_, index) => index.toString()}
@@ -186,17 +168,30 @@ export const SelectedCategoryProductScreen = (props: Props) => {
             <FlatList
                 data={productData}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={renderCards}
+                 renderItem={({ item }) => (
+                     <CardComp loading={loading} item={item} isPressed={()=>{
+                      props.navigation.navigate(screenNames.ProductScreen,{id:item.id});
+                     }}
+                     isSaved={()=>{
+                        setIsSaved(!saved);
+                     }}/>
+                    )}
                 numColumns={2}
                 contentContainerStyle={styles.productListView}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     mainListComp: {
         marginEnd: vw(20),
+    },
+    favoritesText:{
+        fontFamily:fonts.RobotoBold,
+        fontSize:normalize(34),
+        marginLeft:vh(20),
+        marginTop:vh(30),
     },
     taglistStyle:{
         marginTop:vh(10),

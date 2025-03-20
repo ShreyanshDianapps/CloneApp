@@ -11,7 +11,7 @@ type Props = {
 
 }
 
- const RatingComp = (props: Props) => {
+  export const RatingComp = (props: Props) => {
   return (
 
       <View style={[styles.ratingCompRateingView,props.style?.mainStyle]}>
@@ -24,7 +24,7 @@ type Props = {
 
   );
 };
-export default RatingComp;
+
 const styles = StyleSheet.create({
     ratingCompRateingView:{
             gap:normalize(2),

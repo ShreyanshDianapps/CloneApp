@@ -9,10 +9,11 @@ import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 import { vh, vw } from '../utils/dimensions';
 // import color from '../utils/color';
 // import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
-import { BagIcon, HomeTabIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
+import { BagIcon, BlackHeartIcon, HeartIcon, HomeTabIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
 import { ShopRouter } from './ShopRouter';
 
 import { BagRouter } from './BagRouter';
+import { FavoriteRouter } from './FavoriteRouter';
 
 const Bottom = createBottomTabNavigator<BottomNavigationStack>();
 const hideBottomTab = (route:Partial<Route<string>>)=>{
@@ -70,6 +71,18 @@ export const BottomNavigation = () => {
             <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
                {focused && <View style={styles.activeIndicator} />}
           <BagIcon/>
+            </View>
+          ),
+        }}
+      />
+      <Bottom.Screen
+        name={screenNames.FavoriteRouter}
+        component={FavoriteRouter}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View >
+
+          {focused ? <BlackHeartIcon /> : <HeartIcon height={vh(30)} width={vw(30)}/>}
             </View>
           ),
         }}

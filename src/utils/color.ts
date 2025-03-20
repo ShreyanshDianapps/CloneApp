@@ -26,6 +26,7 @@ export default {
     lightGreen:'#90EE90',
     //red
     PrimaryRed:'#DB3022',
+    Neutral_Sub:'#050505',
 
 };
 

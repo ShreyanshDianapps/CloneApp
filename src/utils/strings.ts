@@ -49,6 +49,21 @@ export default
     myBag:'My Bag',
     totalAmount:'Total Amount',
     checkOut:'CHECK OUT',
+    //home
+    fasionSale:'Fashion Sale',
+    check:'Check',
+    new:'New',
+    sale:'Sale',
+    youNeverSeenItBefore:'You\'ve never seen it before',
+    viewAll:'View all',
+    streetClothes:'Street Clothes',
+    superSummerSale:'Super Summer Sale',
+    Favorites:'Favorites',
+    //harsh ui
+    aboutWanderobe:'About Wanderobe',
+    travelLightexplor:'Travel light.   Explore deeply. Dress',
+    meaningfully:' meaningfully.' ,
+    longText:'At WANDEROBE, we believe fashion is a journey that connects you to the places you explore. Our hospitality fashion service delivers exclusive, locally inspired apparel from emerging designers directly to your hotel. Browse our curated collection before your trip, try on unique pieces during your stay, and immerse yourself in the destination’s style. When it’s time to move on, we’ll handle the logistics—no stress, just effortless fashion.',
 
 
 };

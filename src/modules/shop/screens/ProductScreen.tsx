@@ -14,7 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import color from '@cloneApp/utils/color';
 import fonts from '@cloneApp/utils/fonts';
 import strings from '@cloneApp/utils/strings';
-import RatingComp from '../components/RatingComp';
+import { RatingComp } from '../components/RatingComp';
 import { CommonButton } from '@cloneApp/components/CommonButton';
 import { screenNames } from '@cloneApp/utils/screenNames';
 import { AddProduct, Product } from '@cloneApp/modals';
