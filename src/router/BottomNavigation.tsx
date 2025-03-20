@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View,Image } from 'react-native';
 import { screenNames } from '../utils/screenNames';
 import { HomeRouter } from './HomeRouter';
 import { BottomNavigationStack } from '../utils/type';
@@ -9,8 +9,11 @@ import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 import { vh, vw } from '../utils/dimensions';
 // import color from '../utils/color';
 // import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
-import { HomeTabIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
+import { BagIcon, HomeTabIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
 import { ShopRouter } from './ShopRouter';
+import localPngImages from '@cloneApp/utils/localPngImages';
+import color from '@cloneApp/utils/color';
+import { BagRouter } from './BagRouter';
 
 const Bottom = createBottomTabNavigator<BottomNavigationStack>();
 const hideBottomTab = (route:Partial<Route<string>>)=>{
@@ -55,24 +58,24 @@ export const BottomNavigation = () => {
           tabBarIcon: ({ focused }) => (
             <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
                {focused && <View style={styles.activeIndicator} />}
-             <ShopTabIcon/>
+          <ShopTabIcon/>
             </View>
           ),
         }}
       />
-      {/* <Bottom.Screen
-        name={screenNames.ShopRouter}
-        component={ShopRouter}
+       <Bottom.Screen
+        name={screenNames.BagRouter}
+        component={BagRouter}
         options={{
-          tabBarIcon: () => (
-            <View style={styles.floatingButton}>
-              <View style={styles.floatingButtonCircle}>
-                <CreatePostIcon height={vh(28)} width={vw(28)} />
-              </View>
+          tabBarIcon: ({ focused }) => (
+            <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
+               {focused && <View style={styles.activeIndicator} />}
+          <BagIcon/>
             </View>
           ),
         }}
-      /> */}
+      />
+      {/*  */}
        {/* <Bottom.Screen
         name={screenNames.NotificationRouter}
         component={NotificationRouter}

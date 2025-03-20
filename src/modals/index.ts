@@ -79,11 +79,20 @@ export type FilteredData={
     ratingRange:number[];
     brands:string[]
 }
+export type AddProduct={
+    Product:Product
+    userId:string,
+    quantity:number
+}
 export type Review={
     userId:string,
     Product:Product,
     ratings:number,
     comment:string,
+}
+export type UpdateBagData={
+    productId:number,
+    quantity:number
 }
 interface ShopState{
     loading:boolean,
@@ -91,6 +100,7 @@ interface ShopState{
     Product:Product[]|[]
     Filter: FilteredData|null
     ProductData:Product|null
+    BagData: AddProduct[];
 }
 
 const initialShopState:ShopState = {
@@ -99,6 +109,7 @@ const initialShopState:ShopState = {
         Product:[],
         Filter: null,
         ProductData:null,
+        BagData:[],
 
 };
 

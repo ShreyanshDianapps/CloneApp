@@ -12,6 +12,7 @@ export default
     up:'up',
     in:'in',
     email:'Email',
+    items:'items',
     name:'Name',
     password:'Password',
     alreadyHaveAnAccount:'Already have an account?',
@@ -41,7 +42,13 @@ export default
     whatIsYourRate:'What is you rate?',
     pleaseShareYourOpinion:'Please share your opinion about the product',
     yourReview:'Your Review',
-    sendReview:'SEND REVIEW'
+    sendReview:'SEND REVIEW',
+    updateReview:'UPDATE REVIEW',
+    alreadyInBag:'Already in Bag',
+    youCanAlsoLikeThis:'You can also like this',
+    myBag:'My Bag',
+    totalAmount:'Total Amount',
+    checkOut:'CHECK OUT'
 
 
 };

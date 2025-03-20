@@ -22,7 +22,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
 import { Review } from '@cloneApp/modals';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { storeReviews } from '../shopAction';
+import { checkingReview, storeReviews, Users } from '../shopAction';
 import { debounce } from '@cloneApp/utils/sign_in';
 
 type Props = {
@@ -35,6 +35,7 @@ export const BottomSheetReviwComp = (props: Props) => {
   const opacity = useRef(new Animated.Value(1)).current;
   const {user}=useAppSelector((state)=>state.auth)
   const [ratings,setRatings]=useState(0);
+  const [buttonText,setButtonText]=useState(strings.sendReview)
   const dispatch =useAppDispatch();
   const route=useRoute<RouteProp<ShopNavigationStack,'BottomSheetReviwComp'>>();
   const {data}=route.params
@@ -43,9 +44,19 @@ export const BottomSheetReviwComp = (props: Props) => {
   console.log("First Rendert")
   const snapPoints = useMemo(() => [540 + keyboardHeight], [keyboardHeight]);
 
-  const handleTextChange = useCallback((value: string) => {
-    setText(value);
-  }, []);
+  useEffect(()=>{
+const payload:Users={
+  userId:user?.userId??"",
+  productId:data?.id??""
+}
+dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
+  if(res){
+    setRatings(res.ratings);
+    // setText(res.comment);
+    setButtonText(strings.updateReview)
+  }
+})
+  },[dispatch,user])
 
   // Keyboard Listeners
   useEffect(() => {
@@ -65,6 +76,7 @@ export const BottomSheetReviwComp = (props: Props) => {
 
   // Handle Close Animation
   const handleClose = useCallback(() => {
+    console.log("Helli i am pen down")
     Keyboard.dismiss();
     Animated.timing(opacity, {
       toValue: 0,
@@ -76,7 +88,6 @@ export const BottomSheetReviwComp = (props: Props) => {
   }, [props.navigation]);
 
   // Memoized onChange to prevent unnecessary re-renders
-
   return (
     <Pressable onPress={handleClose} style={{ flex: 1 }}>
       <Portal>
@@ -90,23 +101,22 @@ export const BottomSheetReviwComp = (props: Props) => {
           onClose={handleClose}
         >
           <Text style={styles.headingText}>{strings.whatIsYourRate}</Text>
-          <RatingStarComponent starWidth={36} sendRatings={setRatings} style={{ mainStyle: styles.ratingView }} />
+          <RatingStarComponent starWidth={36} sendRatings={(rating)=>{setRatings(rating)}} style={{ mainStyle: styles.ratingView }} rating={ratings} />
           <Text style={styles.thoughtText}>{strings.pleaseShareYourOpinion}</Text>
           <CommonTextInput
             placeholder={strings.yourReview}
             value={text}
-           
-            onChange={handleTextChange}
+            onChange={setText}
             style={{
               mainViewInput: styles.textInput,
               InputTextStyle: styles.textTextInput
             }}
           />
           <CommonButton
-            text={strings.sendReview}
+            text={buttonText}
             onPress={() => {
               const payload:Review={
-                  userId:user?.email?? " ",
+                  userId:user?.userId?? " ",
                   ratings:ratings,
                   comment:text,
                   Product:data

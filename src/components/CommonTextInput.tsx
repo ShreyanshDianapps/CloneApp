@@ -29,7 +29,7 @@ type Props = {
 
 export const CommonTextInput = (props: Props) => {
     const [showPassword, setShowPassword] = useState(false);
-    const[text,setText]=useState('');
+    const [value,setValue] = useState(props.value||"")
     return (
         <View style={[props.style?.mainView]}>
             {/* Input Label */}
@@ -41,11 +41,12 @@ export const CommonTextInput = (props: Props) => {
                 {/* Text Input */}
                 <TextInput
                     placeholder={props.placeholder}
-                    value={props.value}
+                    value={value}
                     style={[styles.inputTextStyle, props.style?.InputTextStyle]}
                     onChangeText={(text)=>{
+                        setValue(text)
                         props.onChange(text)
-                         setText(text)} }
+                    }}
                     returnKeyType="next"
                    
                     secureTextEntry={props.secureTextEntry ? !showPassword : false}

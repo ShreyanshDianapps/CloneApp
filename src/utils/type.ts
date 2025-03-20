@@ -18,11 +18,14 @@ export type ShopNavigationStack={
     ProductScreen:{id:number}
     AdditionalInformation:{data:Product}
     BottomSheetReviwComp:{data:Product}
-
+}
+export type BagNavigationStack={
+    MyBagScreen:undefined
 }
 export type BottomNavigationStack={
     HomeRouter:undefined
     ShopRouter:undefined
+    BagRouter:undefined
 }
 export type RootNavigationStack={
     //Authenication
@@ -44,4 +47,7 @@ export type RootNavigationStack={
     ProductScreen:{id:number}
     AdditionalInformation:{data:Product}
     BottomSheetReviwComp:{data:Product}
+    //bag
+    BagRouter:undefined
+    MyBagScreen:undefined
 }

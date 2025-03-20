@@ -20,6 +20,9 @@ export const screenNames = {
     BottomSheetSortScreen:'BottomSheetSortScreen',
     ProductScreen:'ProductScreen',
     AdditionalInformation:'AdditionalInformation',
-    BottomSheetReviwComp:'BottomSheetReviwComp'
+    BottomSheetReviwComp:'BottomSheetReviwComp',
+    //bag screens
+    BagRouter:'BagRouter',
+    MyBagScreen:'MyBagScreen'
 } as const;
 export type ScreenNames = keyof typeof screenNames

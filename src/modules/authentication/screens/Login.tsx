@@ -33,9 +33,8 @@ type Props = {
         console.log('isAuthenticate',res.isAuthenticate);
             console.log('isAuthenticate',res.isAuthenticate);
             props.navigation.navigate(screenNames.BottomNavigation);
-      }).catch(()=>{
-        Alert.alert('Login failed');
-      });
+      })
+      
     };
     //function for handling googleLogin
     const handleGoogleLogin = async()=>{

@@ -58,7 +58,6 @@ type Props = {
       initialValues={{name:'',email:'',password:''}}
       validationSchema={validationSchema}
       onSubmit={(values)=>{
-        console.log('Hello',values);
             handleButtonSubmit(values);
       }}>
         {({handleChange,handleSubmit,values,errors,touched})=>(

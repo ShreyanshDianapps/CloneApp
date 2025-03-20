@@ -9,7 +9,8 @@ type Props = {
     text?:string,
     Icon?: React.FC<SvgProps>;
     backIcon?: React.FC<SvgProps>;
-    isBackIconPressed:(value:boolean)=>void;
+    isBackIconPressed?:(value:boolean)=>void;
+    isSecondIconPressed?:(value:boolean)=>void;
     style?:{
         mainView?: StyleProp<ViewStyle>;
         HeadingTextStyle?: StyleProp<TextStyle>;
@@ -20,7 +21,11 @@ type Props = {
   return (
     <View style={[props.style?.mainView,styles.defaultMainView]}>
         <Pressable
-        onPress={()=>props.isBackIconPressed(true)}
+        onPress={()=>{
+            if(props.isBackIconPressed){
+                props.isBackIconPressed(true)
+            }
+           }}
         style={styles.backicon}>  {props.backIcon && <props.backIcon />}</Pressable>
       <View style={styles.headingView}>
       {props.text && <Text style={[props.style?.HeadingTextStyle,styles.defaultHeadingTextStyle]}>{props.text}</Text>}
