@@ -14,7 +14,7 @@ type ProfilePageCardProps = {
   onPress: () => void,
   discroptionText: string
 }
-const ProfilePageCard = memo((props: ProfilePageCardProps) => {
+export const ProfilePageCard = memo((props: ProfilePageCardProps) => {
   return (
     <Pressable onPress={props.onPress} style={styles.cardStyle}>
       <View >
@@ -69,12 +69,11 @@ export const MainProfileScreen = (props: Props) => {
           onPress={() => { }} />
         : <ProfilePageCard titleText={strings.myReview}
           discroptionText={strings.review + strings.gap + strings.for + strings.gap + MyReviews.length + strings.gap + strings.items}
-          onPress={() => { }} />}
+          onPress={() =>  props.navigation.navigate(screenNames.MyReviewsScreen)} />}
 
       <ProfilePageCard titleText={strings.settings}
         discroptionText={strings.password + ',' + strings.gap + strings.notifications}
-        onPress={() => { }} />
-
+        onPress={()=>props.navigation.navigate(screenNames.SettingsScreen)} />
     </SafeAreaView>
   );
 };

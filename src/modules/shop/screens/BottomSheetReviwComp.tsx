@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
 import { Review } from '@cloneApp/modals';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { checkingReview, getReviews, storeReviews, Users } from '../shopAction';
+import MessageComp from '@cloneApp/components/MessageComp';
 
 
 type Props = {
@@ -37,6 +38,7 @@ export const BottomSheetReviwComp = (props: Props) => {
   const dispatch = useAppDispatch();
   const route = useRoute<RouteProp<ShopNavigationStack,'BottomSheetReviwComp'>>();
   const {data} = route.params;
+  const [showMessage,setShowMessage] = useState(false);
 
   // Memoized snap points to avoid unnecessary re-renders
   console.log('First Rendert');
@@ -122,7 +124,10 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
                   Product:data,
               };
                 await dispatch(storeReviews(payload));
-                dispatch(getReviews(user.userId));
+                setShowMessage(true);
+               dispatch(getReviews(user.userId));
+               await props.navigation.goBack();
+
               }
 
             }}
@@ -131,6 +136,7 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
               InputTextStyle: styles.buttonTextStyle,
             }}
           />
+          {showMessage && <MessageComp duration={500} message="tect"/>}
         </BottomSheet>
       </Portal>
     </Pressable>

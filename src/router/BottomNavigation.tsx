@@ -1,20 +1,22 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { screenNames } from '../utils/screenNames';
 import { HomeRouter } from './HomeRouter';
 import { BottomNavigationStack } from '../utils/type';
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 
-import { vh, vw } from '../utils/dimensions';
+import { normalize, vh, vw } from '../utils/dimensions';
 // import color from '../utils/color';
 // import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
-import { BagIcon, BlackHeartIcon, HeartIcon, HomeTabIcon, ProfileFocusedIcon, ProfileUnFocuedIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
+import { BagFocuedIcon, BagIcon, BlackHeartIcon, FavoriteTab, HomeFocuedIcon, HomeTabIcon, ProfileFocusedIcon, ProfileUnFocuedIcon, ShopFocuedIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
 import { ShopRouter } from './ShopRouter';
 
 import { BagRouter } from './BagRouter';
 import { FavoriteRouter } from './FavoriteRouter';
 import { ProfileRouter } from './ProfileRouter';
+import strings from '@cloneApp/utils/strings';
+import color from '@cloneApp/utils/color';
 
 const Bottom = createBottomTabNavigator<BottomNavigationStack>();
 const hideBottomTab = (route:Partial<Route<string>>)=>{
@@ -43,10 +45,11 @@ export const BottomNavigation = () => {
         name={screenNames.HomeRouter}
         component={HomeRouter}
         options={{
+
           tabBarIcon: ({ focused }) => (
-            <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
-              {focused && <View style={styles.activeIndicator} />}
-              <HomeTabIcon />
+            <View style={styles.barStyle}>
+              {focused ? <HomeFocuedIcon /> : <HomeTabIcon/>}
+             <Text style={[styles.textStyle,{color:focused ? color.PrimaryRed : color.Gray3}]}>{strings.Home}</Text>
             </View>
           ),
         }}
@@ -54,12 +57,13 @@ export const BottomNavigation = () => {
       {/* Floating Save Button */}
       <Bottom.Screen
         name={screenNames.ShopRouter}
+
         component={ShopRouter}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
-               {focused && <View style={styles.activeIndicator} />}
-          <ShopTabIcon/>
+            <View style={styles.barStyle}>
+              {focused ? <ShopFocuedIcon/> : <ShopTabIcon/>}
+              <Text style={[styles.textStyle,{color:focused ? color.PrimaryRed : color.Gray3}]}>{strings.shop}</Text>
             </View>
           ),
         }}
@@ -69,9 +73,10 @@ export const BottomNavigation = () => {
         component={BagRouter}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
-               {focused && <View style={styles.activeIndicator} />}
-          <BagIcon/>
+            <View style={styles.barStyle}>
+               {focused ? <BagFocuedIcon /> : <BagIcon/>}
+               <Text style={[styles.textStyle,{color:focused ? color.PrimaryRed : color.Gray3}]}>{strings.bag}</Text>
+
             </View>
           ),
         }}
@@ -81,9 +86,10 @@ export const BottomNavigation = () => {
         component={FavoriteRouter}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View >
+            <View style={styles.barStyle}>
 
-          {focused ? <BlackHeartIcon /> : <HeartIcon height={vh(30)} width={vw(30)}/>}
+          {focused ? <BlackHeartIcon /> : <FavoriteTab/>}
+          <Text style={[styles.textStyle,{color:focused ? color.PrimaryRed : color.Gray3}]}>{strings.favorite}</Text>
             </View>
           ),
         }}
@@ -93,9 +99,10 @@ export const BottomNavigation = () => {
         component={ProfileRouter}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View >
+            <View style={styles.barStyle} >
 
           {focused ? <ProfileFocusedIcon /> : <ProfileUnFocuedIcon />}
+          <Text style={[styles.textStyle,{color:focused ? color.PrimaryRed : color.Gray3}]}>{strings.profile}</Text>
             </View>
           ),
         }}
@@ -108,37 +115,23 @@ export const BottomNavigation = () => {
 const styles = StyleSheet.create({
   tabBarStyle: {
     // position: 'absolute',
-    height: vh(80),
+
+    height: vh(70),
   },
-  activeIndicator: {
-    width: vw(40),
-    height: vw(5),
-    // backgroundColor: color.greenColor,
-    borderRadius: vw(5),
-    marginBottom: vh(5),
+  textStyle:{
+
+    fontSize:normalize(12),
+
+    marginTop:vh(3),
   },
-  iconStyle: {
-    alignSelf: 'center',
+  barStyle:{
+    marginTop:vh(15),
+    width:vw(50),
+   alignItems:'center',
+
 
   },
-  notFocusedStyle:{
-      justifyContent:'center',
-      alignItems:'center',
-  },
-  floatingButton: {
-    top: vh(-25),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  floatingButtonCircle: {
-    width: vw(60),
-    height: vw(60),
-    borderRadius: vw(30),
-    // backgroundColor: color.greenColor,
-    justifyContent: 'center',
-    alignItems: 'center',
 
-    // elevation: 6,
-  },
+
 });
 

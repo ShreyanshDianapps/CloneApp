@@ -84,6 +84,18 @@ export default
     units:'Units :',
     settings:'Settings',
     notifications:'Notifications',
+    personalInformation:'Personal Information',
+    changePassword:'Change Password',
+    personal:'Personal',
+    editPersonalInformation:'Edit Personal Information',
+    saveChanges:'Save Changes',
+    logOut:'Log Out',
+    cancel:'Cancel',
+    Home:'Home',
+    shop:'Shop',
+    bag:'Bag',
+    profile:'Profile',
+    favorite:'Favorite',
 
 
 

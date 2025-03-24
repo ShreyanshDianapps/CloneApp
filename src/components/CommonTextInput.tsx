@@ -24,6 +24,7 @@ type Props = {
     };
     onChange: (value: string) => void; // Function triggered on text change
     secureTextEntry?: boolean; // For password fields
+    onEndEditing?:(text:string)=>void
 
 };
 
@@ -48,7 +49,11 @@ export const CommonTextInput = (props: Props) => {
                         props.onChange(text);
                     }}
                     returnKeyType="next"
-
+                    onEndEditing={(text)=>{
+                        if(props.onEndEditing){
+                            props.onEndEditing(text.nativeEvent.text);
+                        }
+                    }}
                     secureTextEntry={props.secureTextEntry ? !showPassword : false}
                 />
 

@@ -13,4 +13,4 @@ const MyReviewsScreen = (props: Props) => {
 
 export default MyReviewsScreen;
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});

@@ -10,7 +10,7 @@ import localPngImages from '@cloneApp/utils/localPngImages';
 
 type Props = {}
 
-export const HarshUi = (props: Props) => {
+export const HarshUi = () => {
   return (
     <SafeAreaView>
         <View style={styles.infoContainer}>

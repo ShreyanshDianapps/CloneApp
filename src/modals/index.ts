@@ -27,11 +27,13 @@ export type userState={
 
 // Default Google signup data (initial state)
 interface AuthState{
+    isLogin:boolean;
     loading:boolean,
     isAuthenticate:boolean,
     user:userState| null,
 }
 const initialAuthState:AuthState = {
+    isLogin:false,
     isAuthenticate:false,
     loading:false,
     user:null,

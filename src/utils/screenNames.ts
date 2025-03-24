@@ -1,5 +1,6 @@
 
 
+
 export const screenNames = {
 
     //Authentication Screens
@@ -34,5 +35,7 @@ export const screenNames = {
     MyReviewsScreen:'MyReviewsScreen',
     OrdersScreen:'OrdersScreen',
     DetailsScreen:'DetailsScreen',
+    SettingsScreen:'SettingsScreen',
+    SettingBottomScreen:'SettingBottomScreen',
 } as const;
 export type ScreenNames = keyof typeof screenNames

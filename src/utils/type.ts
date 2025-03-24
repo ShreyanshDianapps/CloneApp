@@ -1,4 +1,5 @@
 import { Product } from '@cloneApp/modals';
+import { rootData } from '@cloneApp/modules';
 import { NavigatorScreenParams } from '@react-navigation/native';
 export type AuthNavigationStack={
     SignUp:undefined,
@@ -39,6 +40,8 @@ export type ProfileNavigationStack={
     OrdersScreen:undefined,
     MyReviewsScreen:undefined
     DetailsScreen:{index:number}
+    SettingsScreen:undefined
+    SettingBottomScreen:{value:string,height:number,sendDataBack:(data:rootData)=>void}
 }
 export type BottomNavigationStack={
     HomeRouter:undefined

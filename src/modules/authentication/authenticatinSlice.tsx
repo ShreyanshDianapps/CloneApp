@@ -7,7 +7,16 @@ const initialState = { ...initialAuthState }; // Fix: Spread state correctly
 const authSlice = createSlice({
     name: 'auth',
     initialState, // Use properly structured initial state
-    reducers: {},
+    reducers: {
+        logout:(state)=>{
+            state.isLogin = false;
+            state.user = {
+                email: '',
+                name: '',
+                userId: '',
+            };
+        },
+    },
     extraReducers: (builder) => {
         builder
             // Google Signup & Login Cases
@@ -17,6 +26,7 @@ const authSlice = createSlice({
             .addCase(googleSignupAndLoginAction.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.loading = false;
+                state.isLogin = true;
             })
             .addCase(googleSignupAndLoginAction.rejected, (state) => {
                 state.loading = false;
@@ -29,6 +39,7 @@ const authSlice = createSlice({
             .addCase(AuthenticationAction.fulfilled, (state, action) => {
                 state.user = action.payload.user;
                 state.isAuthenticate = action.payload.isAuthenticate;
+
                 state.loading = false;
             })
             .addCase(AuthenticationAction.rejected, (state) => {
@@ -37,5 +48,5 @@ const authSlice = createSlice({
             });
     },
 });
-
+export const {logout} = authSlice.actions;
 export default authSlice.reducer;

@@ -4,8 +4,8 @@ import FaceBookIcon from '@cloneApp/assets/images/svg/FacebookIcon.svg';
 import NavigationBackIcon from '@cloneApp/assets/images/svg/NavigationBack.svg';
 import EyeShowIcon from '@cloneApp/assets/images/svg/Eyeshow.svg';
 import EyeHideIcon from '@cloneApp/assets/images/svg/Hidecon.svg';
-import HomeTabIcon from '@cloneApp/assets/images/svg/HomeTab.svg';
-import ShopTabIcon from '@cloneApp/assets/images/svg/ShopTab.svg';
+import HomeTabIcon from '@cloneApp/assets/images/svg/HomeUnfocued.svg';
+import ShopTabIcon from '@cloneApp/assets/images/svg/ShopUnfocued.svg';
 import DummyImage from '@cloneApp/assets/images/svg/DummyImage.svg';
 import HeartIcon from '@cloneApp/assets/images/svg/HeartIcon.svg';
 import FilledStarIcon from '@cloneApp/assets/images/svg/FilledStar.svg';
@@ -25,6 +25,10 @@ import HomeBannerIcon from '@cloneApp/assets/images/svg/HomeFirstBanner.svg';
 import BlackHeartIcon from '@cloneApp/assets/images/svg/heart.svg';
 import ProfileFocusedIcon from '@cloneApp/assets/images/svg/ProfileFocusedTab.svg';
 import ProfileUnFocuedIcon from '@cloneApp/assets/images/svg/ProfileUnFocused.svg';
+import HomeFocuedIcon from '@cloneApp/assets/images/svg/HomeFocued.svg';
+import ShopFocuedIcon from '@cloneApp/assets/images/svg/ShopFocued.svg';
+import BagFocuedIcon from '@cloneApp/assets/images/svg/BagFocued.svg';
+import FavoriteTab from '@cloneApp/assets/images/svg/FavoriteTab.svg';
 
 export {
     FordwardIcon,
@@ -55,6 +59,10 @@ export {
     BlackHeartIcon,
     ProfileFocusedIcon,
     ProfileUnFocuedIcon,
+    HomeFocuedIcon,
+    ShopFocuedIcon,
+    BagFocuedIcon,
+    FavoriteTab,
 
 
 };

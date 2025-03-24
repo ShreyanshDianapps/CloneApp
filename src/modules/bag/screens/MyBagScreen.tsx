@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View, Animated, FlatList,SafeAreaView } from 'react-native';
-import React, {  useState, memo, use } from 'react';
+import React, {  useState, memo } from 'react';
 
 import { normalize, vh, vw } from '@cloneApp/utils/dimensions';
 import { SearchIcon } from '@cloneApp/utils/localsvg';

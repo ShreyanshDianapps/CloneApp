@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
-import { AddProduct, Orders } from '@cloneApp/modals';
+import { AddProduct } from '@cloneApp/modals';
 export type OrdersData={
   totalAmount:number,
   items:AddProduct[],

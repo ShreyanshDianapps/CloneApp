@@ -1,7 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { initialFavoriteState } from '@cloneApp/modals'; // Assuming this is correct
-import firestore from '@react-native-firebase/firestore';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+
 import { getFavoritesId,getFavoritesData } from './favoritesAction';
 
 
