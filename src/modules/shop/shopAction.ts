@@ -55,15 +55,26 @@ export const storeReviews = createAsyncThunk(
             reviewRef.onSnapshot(async (snapshot) => {
                 if (snapshot.exists) {
                     await reviewRef.update(payload);
-                    return;
+
                 }
                 await reviewRef.set(payload);
-                return;
+                return true;
               });
         }catch(error){
             return rejectWithValue;
         }
     }
+);
+export const getReviews = createAsyncThunk(
+  'shop/getReviews',
+  async(payload:string,{rejectWithValue})=>{
+    try{
+      const response = await firestore().collection('users').doc(payload).collection('reviews').get();
+      return response.docs.map((doc) => doc.data()) as Review[];
+    }catch(error:any){
+      return rejectWithValue(error.message);
+    }
+  }
 );
 export const checkingReview = createAsyncThunk<Review | null, Users>(
     'shop/checkingReview',

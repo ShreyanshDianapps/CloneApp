@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View, Animated, FlatList,SafeAreaView } from 'react-native';
-import React, {  useState, memo } from 'react';
+import React, {  useState, memo, use } from 'react';
 
 import { normalize, vh, vw } from '@cloneApp/utils/dimensions';
 import { SearchIcon } from '@cloneApp/utils/localsvg';
@@ -12,6 +12,8 @@ import { UpdateBagData } from '@cloneApp/modals';
 import RenderMyBag from '../components/RenderMyBag';
 import { updateBagData } from '@cloneApp/modules/shop/shopSlice';
 import { CommonButton } from '@cloneApp/components/CommonButton';
+import { getMyOrder, OrdersData, storeOrders } from '../myBagAction';
+import { deleteMybag } from '@cloneApp/modules/shop/shopSlice';
 const TotalAmount = ()=>{
     const { BagData } = useAppSelector((state) => state.shop);
     const totalAmount = BagData.reduce((acc, item) => acc + item.Product.price * item.quantity, 0);
@@ -88,7 +90,18 @@ export const MyBagScreen = memo(() => {
         />
         </View>
         <TotalAmount/>
-    <CommonButton text={strings.checkOut} onPress={()=>{}} style={{mainView:styles.buttonStyle,InputTextStyle:styles.buttonTextStyle}}/>
+    <CommonButton text={strings.checkOut} onPress={()=>{
+     const Payload:OrdersData = {
+       items:BagData,
+       totalAmount:BagData.reduce((acc, item) => acc + item.Product.price * item.quantity, 0),
+       userId:BagData[0].userId,
+     };
+     dispatch(storeOrders(Payload));
+     dispatch(deleteMybag());
+     dispatch(getMyOrder(BagData[0].userId));
+        }
+
+    } style={{mainView:styles.buttonStyle,InputTextStyle:styles.buttonTextStyle}}/>
       </SafeAreaView>
       );
 });

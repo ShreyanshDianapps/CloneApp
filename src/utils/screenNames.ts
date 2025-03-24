@@ -1,4 +1,5 @@
 
+
 export const screenNames = {
 
     //Authentication Screens
@@ -27,5 +28,11 @@ export const screenNames = {
     MainFavorites:'MainFavorites',
     //harsh
     HarshUi:'HarshUi',
+    //profile
+    ProfileRouter:'ProfileRouter',
+    MainProfileScreen:'MainProfileScreen',
+    MyReviewsScreen:'MyReviewsScreen',
+    OrdersScreen:'OrdersScreen',
+    DetailsScreen:'DetailsScreen',
 } as const;
 export type ScreenNames = keyof typeof screenNames

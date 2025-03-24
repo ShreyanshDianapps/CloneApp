@@ -23,6 +23,8 @@ import MinusIcon from '@cloneApp/assets/images/svg/Add.svg';
 import PlusIcon from '@cloneApp/assets/images/svg/Minus.svg';
 import HomeBannerIcon from '@cloneApp/assets/images/svg/HomeFirstBanner.svg';
 import BlackHeartIcon from '@cloneApp/assets/images/svg/heart.svg';
+import ProfileFocusedIcon from '@cloneApp/assets/images/svg/ProfileFocusedTab.svg';
+import ProfileUnFocuedIcon from '@cloneApp/assets/images/svg/ProfileUnFocused.svg';
 
 export {
     FordwardIcon,
@@ -51,6 +53,8 @@ export {
     PlusIcon,
     HomeBannerIcon,
     BlackHeartIcon,
+    ProfileFocusedIcon,
+    ProfileUnFocuedIcon,
 
 
 };

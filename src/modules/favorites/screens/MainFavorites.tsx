@@ -18,7 +18,7 @@ import strings from '@cloneApp/utils/strings';
 import { dropDownSortArray } from '@cloneApp/utils/comonConstraints';
 import { screenNames } from '@cloneApp/utils/screenNames';
 import { CardComp } from '@cloneApp/modules/home/components/CardComp';
-import { getFavoritesData } from '../favoritesAction';
+import { getFavoritesData, getFavoritesId } from '../favoritesAction';
 
 
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
@@ -58,12 +58,16 @@ export const MainFavorites = (props: Props) => {
               }
             });
         }
-      }, [dispatch, user]) // Ensure dependencies are correct
+      }, [dispatch, user])
 
     );
     useEffect(()=>{
+        console.log('Dispatched');
         if(user)
-        {dispatch(getFavoritesData(user.userId)).unwrap().then((res)=>{
+
+        {
+            dispatch(getFavoritesId(user.userId));
+            dispatch(getFavoritesData(user.userId)).unwrap().then((res)=>{
     if(res){
         setProductData(FavoritesData);
     }

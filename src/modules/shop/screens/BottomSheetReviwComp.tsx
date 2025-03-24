@@ -20,7 +20,7 @@ import { RootNavigationStack, ShopNavigationStack } from '@cloneApp/utils/type';
 import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
 import { Review } from '@cloneApp/modals';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { checkingReview, storeReviews, Users } from '../shopAction';
+import { checkingReview, getReviews, storeReviews, Users } from '../shopAction';
 
 
 type Props = {
@@ -112,14 +112,19 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
           />
           <CommonButton
             text={buttonText}
-            onPress={() => {
-              const payload:Review = {
+            onPress={async() => {
+
+              if(user){
+                const payload:Review = {
                   userId:user?.userId ?? ' ',
                   ratings:ratings,
                   comment:text,
                   Product:data,
               };
-              dispatch(storeReviews(payload));
+                await dispatch(storeReviews(payload));
+                dispatch(getReviews(user.userId));
+              }
+
             }}
             style={{
               mainView: styles.buttonMainView,

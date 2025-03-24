@@ -1,3 +1,5 @@
+import { OrdersData } from '@cloneApp/modules/bag/myBagAction';
+
 // Define a common type for authentication data
 export type authenticateData = {
     email: string;
@@ -9,12 +11,18 @@ export type SignUpObject={
     password:string,
 }
 
+export type Orders={
+    items:OrdersData,
+    orderNumber:string,
+    createdAt:Date
 
+}
 // Define a type for Google sign-up data
 export type userState={
     name:string,
     email:string,
-    userId:string
+    userId:string,
+
 }
 
 // Default Google signup data (initial state)
@@ -133,10 +141,23 @@ const initialFavoriteState:FavoritesState = {
     FavoritesData:[],
     Filter: null,
 };
+
+interface ProfileState{
+    loading:boolean,
+    MyOrder:Orders[],
+    MyReviews:Review[]
+}
+const initialProfileState:ProfileState = {
+    loading:false,
+    MyOrder:[],
+    MyReviews:[],
+
+};
 export {
     initialAuthState,
     initialShopState,
     initialHomeState,
     initialFavoriteState,
+    initialProfileState,
 };
 

@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback, use, useEffect } from 'react';
+import React, { memo, useState,  useEffect } from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -18,7 +18,7 @@ import { RatingComp } from '@cloneApp/modules/shop/components/RatingComp';
 import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
 import { Users } from '@cloneApp/modules/shop/shopAction';
 import { getFavoritesId, toggleFavorite } from '@cloneApp/modules/favorites/favoritesAction';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+
 
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 
@@ -36,7 +36,7 @@ type Props = {
   const [saved,setSaved] = useState(Favorites.includes(item.id));
 useEffect(()=>{
   if(user){
-    dispatch(getFavoritesId(user.userId));
+    // dispatch(getFavoritesId(user.userId));
   }
 
 },[saved]);

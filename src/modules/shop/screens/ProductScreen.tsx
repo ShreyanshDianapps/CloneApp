@@ -64,8 +64,12 @@ export const ProductScreen = (props: Props) => {
         dispatch(getProductById(id));
 
         // Check if product is in the bag
-        const isProductInBag = BagData.some(item => item.Product.id === ProductData?.id);
+        console.log('Bag Data',BagData);
+        const isProductInBag = Array.isArray(BagData) && BagData.length > 0
+  ? BagData.some(item => item?.Product?.id === ProductData?.id)
+  : false;
         if (isProductInBag) {
+            console.log('true');
             setButtonText(strings.alreadyInBag);
         }
 

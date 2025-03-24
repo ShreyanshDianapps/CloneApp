@@ -9,11 +9,12 @@ import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 import { vh, vw } from '../utils/dimensions';
 // import color from '../utils/color';
 // import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
-import { BagIcon, BlackHeartIcon, HeartIcon, HomeTabIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
+import { BagIcon, BlackHeartIcon, HeartIcon, HomeTabIcon, ProfileFocusedIcon, ProfileUnFocuedIcon, ShopTabIcon } from '@cloneApp/utils/localsvg';
 import { ShopRouter } from './ShopRouter';
 
 import { BagRouter } from './BagRouter';
 import { FavoriteRouter } from './FavoriteRouter';
+import { ProfileRouter } from './ProfileRouter';
 
 const Bottom = createBottomTabNavigator<BottomNavigationStack>();
 const hideBottomTab = (route:Partial<Route<string>>)=>{
@@ -87,45 +88,19 @@ export const BottomNavigation = () => {
           ),
         }}
       />
-      {/*  */}
-       {/* <Bottom.Screen
-        name={screenNames.NotificationRouter}
-        component={NotificationRouter}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
-               {focused && <View style={styles.activeIndicator} />}
-              <NotificationIcon />
-            </View>
-          ),
-        }}
-      />  */}
-      {/* Profile Screen */}
-      {/* <Bottom.Screen
+       <Bottom.Screen
         name={screenNames.ProfileRouter}
         component={ProfileRouter}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
-               {focused && <View style={styles.activeIndicator} />}
-              <ProfileIcon height={vh(20)} width={vw(20)} />
+            <View >
 
+          {focused ? <ProfileFocusedIcon /> : <ProfileUnFocuedIcon />}
             </View>
           ),
         }}
-      /> */}
-      {/* <Bottom.Screen
-        name={screenNames.ChatBoxRouter}
-        component={ChatBoxRouter}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={[focused ? styles.notFocusedStyle : styles.iconStyle]}>
-               {focused && <View style={styles.activeIndicator} />}
-              <ChatBottomIcon height={vh(20)} width={vw(20)} />
-            </View>
-          ),
-        }}
-      /> */}
+      />
+
     </Bottom.Navigator>
   );
 };

@@ -34,11 +34,18 @@ export type FavNavigationStack={
     BottomSheetReviwComp:{data:Product}
     ProductScreen:{id:number}
 }
+export type ProfileNavigationStack={
+    MainProfileScreen:undefined,
+    OrdersScreen:undefined,
+    MyReviewsScreen:undefined
+    DetailsScreen:{index:number}
+}
 export type BottomNavigationStack={
     HomeRouter:undefined
     ShopRouter:undefined
     BagRouter:undefined
     FavoriteRouter:undefined
+    ProfileRouter:undefined
 }
 export type RootNavigationStack={
     //Authenication
@@ -67,6 +74,8 @@ export type RootNavigationStack={
      MainFavorites:undefined
      FavoriteRouter:undefined
      //harsh
-     HarshUi:undefined
+     HarshUi:undefined//
+     //profile
+     ProfileRouter:undefined
 
 }

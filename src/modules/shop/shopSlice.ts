@@ -18,6 +18,10 @@ const shopSlice = createSlice({
         const index = state.BagData.findIndex((item) => item.Product.id === productId);
         state.BagData[index].quantity = quantity;
     },
+    deleteMybag: (state) => {
+        state.BagData = [];
+      },
+
     },
     extraReducers(builder) {
         builder
@@ -53,9 +57,6 @@ const shopSlice = createSlice({
         .addCase(getProductById.rejected,(state)=>{
             state.loading = false;
         })
-        .addCase(addToCart.pending,(state)=>{
-            state.loading = true;
-        })
         .addCase(addToCart.fulfilled,(state,action)=>{
             state.loading = false;
             state.BagData = Array.isArray(state.BagData)
@@ -69,5 +70,5 @@ const shopSlice = createSlice({
     },
 
 });
-export const { setFilterFields,updateBagData } = shopSlice.actions;
+export const { setFilterFields,updateBagData,deleteMybag } = shopSlice.actions;
 export default shopSlice.reducer;

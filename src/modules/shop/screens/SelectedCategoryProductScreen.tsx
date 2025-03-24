@@ -83,7 +83,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
       };
     const callBack = (data:number[])=>{
 
-
+        console.log(data);
 
     };
     const callBackIndex = (data:number)=>{
