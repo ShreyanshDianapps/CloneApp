@@ -37,5 +37,7 @@ export const screenNames = {
     DetailsScreen:'DetailsScreen',
     SettingsScreen:'SettingsScreen',
     SettingBottomScreen:'SettingBottomScreen',
+    TopBarScreen:'TopBarScreen',
+    TabBarLibScreen:'TabBarLibScreen'
 } as const;
 export type ScreenNames = keyof typeof screenNames

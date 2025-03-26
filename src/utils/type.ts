@@ -42,6 +42,8 @@ export type ProfileNavigationStack={
     DetailsScreen:{index:number}
     SettingsScreen:undefined
     SettingBottomScreen:{value:string,height:number,sendDataBack:(data:rootData)=>void}
+    TopBarScreen:undefined
+    TabBarLibScreen:undefined
 }
 export type BottomNavigationStack={
     HomeRouter:undefined

@@ -1,10 +1,9 @@
 import { Pressable, StyleSheet, Text, View, Animated, FlatList,SafeAreaView } from 'react-native';
 import React, {  useState, memo } from 'react';
 
-import { normalize, vh, vw } from '@cloneApp/utils/dimensions';
+import { normalize, screenHeight, vh, vw } from '@cloneApp/utils/dimensions';
 import { SearchIcon } from '@cloneApp/utils/localsvg';
 import strings from '@cloneApp/utils/strings';
-import { CommonTextInput } from '@cloneApp/components/CommonTextInput';
 import color from '@cloneApp/utils/color';
 import fonts from '@cloneApp/utils/fonts';
 import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
@@ -35,17 +34,11 @@ export const MyBagScreen = memo(() => {
     const newState = !isSearchBarOpen;
     setIsSearchBarOpen(newState);
 
-    Animated.parallel([
-      Animated.timing(animatedValue, {
-        toValue: newState ? 1 : 0,
-        duration: 600,
-        useNativeDriver: false,
-      }),
-    ]).start();
+
   };
   const animatedWidth = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, vw(300)], // Width expands from 0 to 250vw
+    outputRange: [0, vw(343)], // Width expands from 0 to 250vw
   });
 
   const animatedBackgroundColor = animatedValue.interpolate({
@@ -53,23 +46,20 @@ export const MyBagScreen = memo(() => {
     outputRange: ['transparent', color.Neutral_White], // Changes from white to light gray
   });
 
-
+  if (BagData.length < 1){
+    return (
+      <Text style={styles.noDataText}>{strings.noItemsAddeded}</Text>
+    );
+  }
       return (
       <SafeAreaView>
 
         <Animated.View style={[styles.searchContainer, { width: animatedWidth, backgroundColor: animatedBackgroundColor }]}>
-          <CommonTextInput
-            value={searchData}
-            placeholder={strings.search}
-            onChange={setSearchedData}
-            style={{
-              InputTextStyle: { backgroundColor: 'transparent' },
-            }}
-          />
-          <Pressable onPress=
+
+         {!isSearchBarOpen && <Pressable onPress=
             {handleSearchPress} style={styles.searchIcon}>
             <SearchIcon height={vh(25)} width={vw(25)} />
-          </Pressable>
+          </Pressable>}
         </Animated.View>
         <Text style={styles.myBagStyle}>{strings.myBag}</Text>
         <View style={styles.listContainer}>
@@ -80,11 +70,14 @@ export const MyBagScreen = memo(() => {
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item}) =>
           <RenderMyBag data={item} sendQunatityBack={(value)=>{
-           const payload:UpdateBagData = {
-            productId:item.Product.id,
-            quantity:value,
-           };
-            dispatch(updateBagData(payload));
+            if(value){
+              const payload:UpdateBagData = {
+                productId:item.Product.id,
+                quantity:value,
+               };
+                dispatch(updateBagData(payload));
+            }
+           
           }}
           />}
         />
@@ -112,20 +105,28 @@ export const MyBagScreen = memo(() => {
         flexDirection: 'row',
       alignItems: 'center',
   },
+  noDataText:{
+      alignSelf:'center',
+      marginTop:vh(screenHeight / 2 - 80),
+      fontSize:normalize(24),
+      color:color.Gray2,
+      fontFamily:fonts.RobotoSemiBold,
+
+  },
       searchContainer: {
-        alignSelf:'flex-end',
-      height: vh(40),
-    //   marginLeft:vw(20),
-      marginBottom:vh(40),
-      borderRadius: vw(20),
-      paddingHorizontal: vw(10),
-      justifyContent: 'center',
-      overflow: 'hidden',
+      //   alignSelf:'flex-end',
+      //   height: vh(40),
+      // marginBottom:vh(40),
+      // borderRadius: vw(20),
+      // paddingHorizontal: vw(10),
+      // justifyContent: 'center',
+      // overflow: 'hidden',
+      // marginRight:vw(20)
   },
       searchIcon: {
         position:'absolute',
       alignSelf: 'flex-end',
-      marginRight: vw(10),
+
   },
       myBagStyle:{
         flexDirection:'row',

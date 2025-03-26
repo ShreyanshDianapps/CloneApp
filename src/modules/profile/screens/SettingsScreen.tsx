@@ -16,7 +16,7 @@ type Props = {
 
 export const SettingsScreen = (props: Props) => {
     const sendDataBack = (data:rootData)=>{
-
+        console.log(data);
     };
     return (
         <SafeAreaView >

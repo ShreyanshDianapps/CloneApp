@@ -8,7 +8,7 @@ import color from '@cloneApp/utils/color';
 
 import localPngImages from '@cloneApp/utils/localPngImages';
 
-type Props = {}
+// type Props = {}
 
 export const HarshUi = () => {
   return (

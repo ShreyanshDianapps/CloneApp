@@ -96,7 +96,7 @@ export default
     bag:'Bag',
     profile:'Profile',
     favorite:'Favorite',
-
+    noItemsAddeded:'No Items Added',
 
 
 

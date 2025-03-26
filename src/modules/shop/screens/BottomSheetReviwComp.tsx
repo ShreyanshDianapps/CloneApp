@@ -56,7 +56,7 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
     setButtonText(strings.updateReview);
   }
 });
-  },[dispatch,user]);
+  },[dispatch,user,data?.id]);
 
   // Keyboard Listeners
   useEffect(() => {
@@ -85,7 +85,7 @@ dispatch(checkingReview(payload)).unwrap().then((res:Review| null)=>{
     }).start(() => {
       props.navigation.goBack();
     });
-  }, [props.navigation]);
+  }, [props.navigation,opacity]);
 
   // Memoized onChange to prevent unnecessary re-renders
   return (

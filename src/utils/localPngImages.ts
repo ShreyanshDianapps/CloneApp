@@ -6,4 +6,5 @@ export default{
    BigBanner:require(imagepath + 'BigBanner.png'),
    Harsh:require(imagepath + 'Harsh.png'),
    Shop:require(imagepath + 'Shop.png'),
+   CrossIconPng:require(imagepath+'CrossIconPng.png')
 };

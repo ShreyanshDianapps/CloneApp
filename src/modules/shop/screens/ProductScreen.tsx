@@ -162,7 +162,7 @@ export const ProductScreen = (props: Props) => {
                 </View>
             )}
         </Pressable>
-    ), [loading]);
+    ), [loading,props.navigation]);
     return (
         <View >
             <HeadingCompnent

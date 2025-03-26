@@ -74,6 +74,12 @@ export const MainProfileScreen = (props: Props) => {
       <ProfilePageCard titleText={strings.settings}
         discroptionText={strings.password + ',' + strings.gap + strings.notifications}
         onPress={()=>props.navigation.navigate(screenNames.SettingsScreen)} />
+          <ProfilePageCard titleText={strings.settings}
+        discroptionText={strings.password + ',' + strings.gap + strings.notifications}
+        onPress={()=>props.navigation.navigate(screenNames.TopBarScreen)} />
+         <ProfilePageCard titleText={strings.settings}
+        discroptionText={strings.password + ',' + strings.gap + strings.notifications}
+        onPress={()=>props.navigation.navigate(screenNames.TabBarLibScreen)} />
     </SafeAreaView>
   );
 };

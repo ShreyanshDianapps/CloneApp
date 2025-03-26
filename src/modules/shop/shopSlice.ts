@@ -16,10 +16,10 @@ const shopSlice = createSlice({
 
         // Find the product in BagData
         const index = state.BagData.findIndex((item) => item.Product.id === productId);
-        state.BagData[index].quantity = quantity;
+        state.BagData[index].quantity = action.payload.quantity;
     },
     deleteMybag: (state) => {
-        state.BagData = [];
+        state.BagData.splice(0, state.BagData.length);
       },
 
     },

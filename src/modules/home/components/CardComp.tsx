@@ -17,7 +17,7 @@ import { BlackHeartIcon, HeartIcon } from '@cloneApp/utils/localsvg';
 import { RatingComp } from '@cloneApp/modules/shop/components/RatingComp';
 import { useAppDispatch, useAppSelector } from '@cloneApp/utils/hooks';
 import { Users } from '@cloneApp/modules/shop/shopAction';
-import { getFavoritesId, toggleFavorite } from '@cloneApp/modules/favorites/favoritesAction';
+import {  toggleFavorite } from '@cloneApp/modules/favorites/favoritesAction';
 
 
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
@@ -27,6 +27,7 @@ type Props = {
   item: Product;
  isPressed: (id:number) => void;
  isSaved?:()=>void
+ favoirtes?:number[]
 };
 
   export const CardComp = memo(({ item, loading,isPressed,isSaved }: Props) => {
@@ -39,7 +40,7 @@ useEffect(()=>{
     // dispatch(getFavoritesId(user.userId));
   }
 
-},[saved]);
+},[saved,user]);
 
 
   return (

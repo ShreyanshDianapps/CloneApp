@@ -65,7 +65,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
 
           setProductData(filteredData);
         }
-      }, [Filter]);
+      }, [Filter,productData]);
 
     const extractTags = (products: Product[]) => {
         const allTags = products.flatMap((product) => product.tags);
@@ -75,8 +75,8 @@ export const SelectedCategoryProductScreen = (props: Props) => {
         }
     };
     const extractBrands = (products: Product[]) => {
-        const allBrands = new Set(products.map((item) =>item?.brand));
-        const uniqueBrands = Array.from(new Set(allBrands));
+        const allBrands1 = new Set(products.map((item) =>item?.brand));
+        const uniqueBrands = Array.from(new Set(allBrands1));
         if (JSON.stringify(uniqueBrands) !== JSON.stringify(allBrands)) {
             setAllBrands(uniqueBrands);
         }
@@ -121,7 +121,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
                 </Text>
             )}
         </Pressable>
-    ), [loading,productData,handleSelectedTagData]);
+    ), [loading,handleSelectedTagData]);
 
     const renderCards = useCallback(({ item }: { item: Product }) => (
         <Pressable style={styles.mainListComp} onPress={()=>props.navigation.navigate(screenNames.ProductScreen,{id:item.id})}>
@@ -156,7 +156,7 @@ export const SelectedCategoryProductScreen = (props: Props) => {
                 </View>
             )}
         </Pressable>
-    ), [loading]);
+    ), [loading,props.navigation]);
 
     return (
         <View>

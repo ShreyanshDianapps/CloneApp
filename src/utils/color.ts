@@ -27,6 +27,7 @@ export default {
     //red
     PrimaryRed:'#DB3022',
     Neutral_Sub:'#050505',
+    stellBlue:'#4682B4'
 
 };
 

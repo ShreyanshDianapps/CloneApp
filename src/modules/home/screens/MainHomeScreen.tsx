@@ -36,7 +36,7 @@ type Props = {
     if(user){
       dispatch(getFavoritesId(user.userId)); }
 
-  },[dispatch,refreshing]);
+  },[dispatch,refreshing,user]);
 
   return (
     <ScrollView
@@ -77,6 +77,7 @@ type Props = {
       <CardComp loading={loading} item={item} isPressed={(id)=>{
           props.navigation.navigate(screenNames.ProductScreen,{id:id});
       }}
+     favoirtes={Favorites}
       />
      )}
      horizontal

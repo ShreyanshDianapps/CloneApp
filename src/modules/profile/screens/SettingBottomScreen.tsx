@@ -25,10 +25,10 @@ type Props = {
 
 export const SettingBottomScreen = (props: Props) => {
   const route = useRoute<RouteProp<ProfileNavigationStack,'SettingBottomScreen'>>();
-  const {value,sendDataBack,height} = route.params;
+  const {value,height} = route.params;
   const {user} = useAppSelector((state)=>state.auth);
 const [name,setName] = useState('');
-const [email,setEmail] = useState('');
+// const [email,setEmail] = useState('');
 const dispatch = useAppDispatch();
 const rootNavigation = props.navigation.getParent<NativeStackNavigationProp<RootNavigationStack>>();
   const handleLogout = async()=>{

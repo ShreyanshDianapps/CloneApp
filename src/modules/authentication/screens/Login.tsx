@@ -8,7 +8,7 @@ import { validationSchema } from '@cloneApp/utils/validation';
 import { normalize, vh, vw } from '@cloneApp/utils/dimensions';
 import fonts from '@cloneApp/utils/fonts';
 import { RootNavigationStack } from '@cloneApp/utils/type';
-import { FordwardIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
+import { EyeHideIcon, EyeShowIcon, FordwardIcon, NavigationBackIcon } from '@cloneApp/utils/localsvg';
 import { Google_signIn } from '@cloneApp/utils/sign_in';
 import { CommonButton } from '@cloneApp/components/CommonButton';
 import { useAppDispatch,useAppSelector } from '@cloneApp/utils/hooks';
