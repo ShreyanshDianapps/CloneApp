@@ -38,6 +38,11 @@ export const screenNames = {
     SettingsScreen:'SettingsScreen',
     SettingBottomScreen:'SettingBottomScreen',
     TopBarScreen:'TopBarScreen',
-    TabBarLibScreen:'TabBarLibScreen'
+    TabBarLibScreen:'TabBarLibScreen',
+//one god
+    SplashScreen:'SplashScreen',
+    SelectLanguageScreen:'SelectLanguageScreen',
+    PhoneNumberScreen:'PhoneNumberScreen',
+    OtpScreen:'OtpScreen'
 } as const;
 export type ScreenNames = keyof typeof screenNames

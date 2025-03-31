@@ -4,10 +4,14 @@ export default {
     Netual_White_Light:'#F9F9F9',
 
     Black: '#222222',
+    languageTextColor:'#4B4B4B',
     Gray1: '#484848',
     Gray2: '#797979',
     Gray3: '#A9A9A9',
     Gray4: '#D9D9D9',
+    Gray0:'#737373',
+    GrayLight30:'rgba(217,217,217,0.3)',
+    GrayDark30:'rgba(115,115,115,0.3)',
     //primary
     red:'rgb(255, 0, 0)',
     Primary100:'#129575',
@@ -27,7 +31,9 @@ export default {
     //red
     PrimaryRed:'#DB3022',
     Neutral_Sub:'#050505',
-    stellBlue:'#4682B4'
+    stellBlue:'#4682B4',
+    splashColor:'#E84824',
+    splashLightColor:'#FFF4EA'
 
 };
 

@@ -1,9 +1,12 @@
 
 export default
 {
+    asending:'Ascending',
+    desending:'Desending',
+    cloneApp:'Welcome To Clone App',
      //commonPlaceHolders
      commonPlaceHolder:'Enter your',
-
+    age:'Age',
      //common symbols
      gap:' ',
      dollar:'$',
@@ -97,6 +100,19 @@ export default
     profile:'Profile',
     favorite:'Favorite',
     noItemsAddeded:'No Items Added',
+    viewMore:'...ViewMore',
+    delete:'Delete',
+    edit:'Edit',
+    selectLanguage:'Select Language',
+    choseYourPreferedLanguage:'Choose your preferred language',
+    next:'Next',
+    
+    letsTakeFirstStep:'Let’s take the first step with devotion.',
+    enterYourNumber:'Enter Your Number',
+    sixOtpSend:'6 digit OTP will be sent on this number.',
+    phoneNumber:'Phone Number',
+    enterPhoneNumber:'Enter Phone Number',
+    getOtp:'Get OTP'
 
 
 

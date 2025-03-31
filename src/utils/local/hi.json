@@ -1,0 +1,20 @@
+{
+    "translation": {
+      "hello":"Hello",
+      "letsTakeFirstStep":"भक्ति के साथ पहला कदम बढ़ाएं",
+      "enterYourNumber":"अपना नंबर दर्ज करें",
+     "sixOtpSend":"6 अंकों का OTP इस नंबर पर भेजा जाएगा।",
+     "phoneNumber": "फ़ोन नंबर",
+      "Get OTP":"ओटीपी प्राप्त करें",
+      "Next":"अगला",
+      
+      "enterOtp": "ओटीपी दर्ज करें",
+      "pleaseEnterSixDigitCode": "कृपया अपने मोबाइल नंबर पर भेजा गया 6-अंकों का कोड दर्ज करें",
+      "dontReciveOtp": "ओटीपी नहीं मिला?",
+      "resendOtp": "ओटीपी पुनः भेजें",
+      "verify": "सत्यापित करें"
+      
+
+
+    }
+  }

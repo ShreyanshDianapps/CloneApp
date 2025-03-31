@@ -1,0 +1,19 @@
+{
+    "translation": {
+      "hello": "Hello",
+      "letsTakeFirstStep": "Let’s take the first step with devotion.",
+      "enterYourNumber": "Enter Your Number",
+      "sixOtpSend": "6 digit OTP will be sent on this number.",
+      "phoneNumbe": "Phone Number",
+     
+      "enterOtp":"Enter OTP",
+      "pleaseEnterSixDigitCode":"Please enter the 6-digit code sent on your  mobile number",
+      "dontReciveOtp":"Didn’t receive OTP? ",
+      "resendOtp":"Resend OTP",
+      "verify":"Verify"
+
+
+
+    }
+  }
+  

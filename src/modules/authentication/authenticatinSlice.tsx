@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice,PayloadAction } from '@reduxjs/toolkit';
 import { googleSignupAndLoginAction, AuthenticationAction } from './authenticationAction';
 import { initialAuthState } from '@cloneApp/modals'; // Assuming this is correct
 
@@ -16,6 +16,10 @@ const authSlice = createSlice({
                 userId: '',
             };
         },
+        setLanguage:(state,action:PayloadAction<string>)=>{
+            
+                state.language=action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -39,7 +43,7 @@ const authSlice = createSlice({
             .addCase(AuthenticationAction.fulfilled, (state, action) => {
                 state.user = action.payload.user;
                 state.isAuthenticate = action.payload.isAuthenticate;
-
+                state.isLogin = true;
                 state.loading = false;
             })
             .addCase(AuthenticationAction.rejected, (state) => {
@@ -48,5 +52,5 @@ const authSlice = createSlice({
             });
     },
 });
-export const {logout} = authSlice.actions;
+export const {logout,setLanguage} = authSlice.actions;
 export default authSlice.reducer;

@@ -1,17 +1,47 @@
-import { StyleSheet, Animated, View, FlatList, Pressable, Text } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
-import { normalize, screenWidth, vh, vw } from '@cloneApp/utils/dimensions';
+import { StyleSheet, Animated, View, FlatList, Pressable, Text, ImageBackground } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { normalize, screenHeight, screenWidth, vh, vw } from '@cloneApp/utils/dimensions';
 import color from '@cloneApp/utils/color';
 import localPngImages from '@cloneApp/utils/localPngImages';
+import { Review } from '@cloneApp/modals';
+import { useAppSelector } from '@cloneApp/utils/hooks';
+import { RatingComp } from '@cloneApp/modules/shop/components/RatingComp';
+import fonts from '@cloneApp/utils/fonts';
+import strings from '@cloneApp/utils/strings';
+import { OptionsICon } from '@cloneApp/utils/localsvg';
+type OptionsProps = {
+  id: number;
+}
+const OptionsContainer = (props: OptionsProps) => {
+  return (
+    // <View style={styles.optionMainView}>
+    <View style={styles.optionContainerView}>
+      <Pressable style={styles.optionTextView}>
+        <Text style={styles.optionTextStyle}>{strings.delete}</Text>
+      </Pressable>
+      <Pressable style={styles.optionTextView}>
+        <Text style={styles.optionTextStyle}>{strings.edit}</Text>
+      </Pressable>
+    </View>
+    // </View>
+  )
 
+}
 
 const MyReviewsScreen = () => {
-  const array = [1, 1, 1, 1, 1, 1]
+
   const animatedHeightRef = useRef(new Animated.Value(0)).current
+  const { MyReviews } = useAppSelector((state) => state.profile)
+  const [myReviewData, setMyReviewData] = useState<Review[]>(MyReviews);
   const animatedMarginLeftRef = useRef(new Animated.Value(0)).current
   const animatedCrossRef = useRef(new Animated.Value(0)).current
   const [newState, setNewState] = useState(false)
   const animatedCardRef = useRef(new Animated.Value(0)).current
+  const [showOptions, setShowOptions] = useState({
+    isShow: false,
+    id: -1,
+  })
+
   useEffect(() => {
     Animated.parallel([
       Animated.timing(animatedHeightRef, {
@@ -26,15 +56,15 @@ const MyReviewsScreen = () => {
       })
     ]).start()
   }, [])
-  const animatedCardViewStyle={
-      marginTop:animatedCardRef.interpolate({
-        inputRange:[0,1],
-        outputRange:[0,vh(80)]
-      }),
-      gap:animatedCardRef.interpolate({
-        inputRange:[0,1],
-        outputRange:[0,normalize(30)]
-      })
+  const animatedCardViewStyle = {
+    marginTop: animatedCardRef.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, vh(80)]
+    }),
+    gap: animatedCardRef.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, normalize(30)]
+    })
 
   }
   const animatedTransformationStyle = {
@@ -122,41 +152,104 @@ const MyReviewsScreen = () => {
       outputRange: [40, 10]
     }),
   }
-  return (
-    <View style={styles.container}>
+  const [selectedReview, setSelectedReview] = useState<Review | null>(null);
+  const renderHeader = useCallback(() => {
+    return (
       <Animated.View style={[styles.upperViewStyle, { height: animatedHeight }]}>
+        {selectedReview &&
+          <View style={styles.reviewView}>
+            <Text style={styles.commentStyle}>{selectedReview.comment}</Text>
+          </View>}
 
       </Animated.View>
+    );
+  }, [selectedReview]);
+  return (
+    <Pressable onPress={() => {
+      if (showOptions.isShow) {
+        setShowOptions({
+          isShow: false,
+          id: -1
+        })
+      }
+    }} style={styles.container}>
+      {renderHeader()}
       <Animated.View style={[styles.defaultStyle, { marginLeft: animatedMarginLeft }]}>
         <FlatList
+
           contentContainerStyle={styles.conatinerStyle}
-          data={array}
+          data={myReviewData}
           showsVerticalScrollIndicator={false}
           keyExtractor={(_, index) => index.toString()}
           renderItem={(item) => (
-            <View style={styles.cardStyle}>
-                
-            </View>
+            <Pressable onLongPress={() => {
+              setSelectedReview(item.item)
+            }}
+              onPress={() => {
+                if (showOptions.isShow) {
+                  setShowOptions({
+                    isShow: false,
+                    id: -1
+                  })
+                }
+              }} style={styles.cardStyle}>
+              <ImageBackground source={{ uri: item.item.Product.thumbnail }} style={styles.imageView}>
+
+              </ImageBackground>
+              <View  >
+                <View style={styles.ratingView}>
+                  <Text style={styles.rateText}>{item.item.ratings}</Text>
+                  <View style={styles.rateView}>
+                    <RatingComp rating={item.item.ratings} />
+                  </View>
+                </View>
+                <View style={styles.commentView}>
+                  {item.item.comment.length > 20 ?
+                    <Text style={styles.commentText}>{item.item.comment.slice(0, 15)}<Text style={styles.viewMoreText}>{strings.viewMore}</Text></Text>
+                    : <Text style={styles.commentText}>{item.item.comment}</Text>}
+
+                </View>
+              </View>
+              <Pressable onPress={() => setShowOptions({
+                isShow: true,
+                id: item.index
+              })} style={styles.optionsStyle}> <OptionsICon /></Pressable>
+              {showOptions.isShow && showOptions.id === item.index && <OptionsContainer id={item.item.Product.id} />}
+            </Pressable>
+
+
           )}
         />
       </Animated.View>
 
       <Animated.View style={[styles.defaulFloatingButton, animatedCrossStyle]}>
         <Animated.View style={[animatedCardViewStyle]}>
-        <Animated.View style={[styles.defaultCardStyle, animatedCardStyle]}>
-        </Animated.View>
-        <Animated.View style={[styles.defaultCardStyle, animatedCardStyle]}>
-        </Animated.View>
-        <Animated.View style={[styles.defaultCardStyle, animatedCardStyle]}>
+          <Animated.View style={[styles.defaultCardStyle, animatedCardStyle]}>
+            <Pressable onPress={() => {
+              const sortedReviews = Array.from(MyReviews).sort((a, b) => a.ratings - b.ratings);
+              setMyReviewData(sortedReviews);
+            }}> <Text style={styles.cardTextStyle}>{strings.asending}</Text></Pressable>
+          </Animated.View>
+          <Animated.View style={[styles.defaultCardStyle, animatedCardStyle]}>
+            <Pressable onPress={() => {
+              const sortedReviews = Array.from(MyReviews).sort((a, b) => b.ratings - a.ratings);
+              setMyReviewData(sortedReviews);
+            }}><Text style={styles.cardTextStyle}>{strings.desending}</Text></Pressable>
+          </Animated.View>
+          <Animated.View style={[styles.defaultCardStyle, animatedCardStyle]}>
+          <Pressable onPress={() => {
+    const sortedReviews = [...MyReviews].sort((a, b) => b.comment.length - a.comment.length);
+    setMyReviewData(sortedReviews);
+}}><Text style={styles.cardTextStyle}>{strings.apply}</Text></Pressable>
 
-        </Animated.View>
+          </Animated.View>
         </Animated.View>
       </Animated.View>
       <Pressable onPress={handleCrossAnimation} style={styles.pressable}>
-      <Animated.Image source={localPngImages.CrossIconPng} style={[styles.imageStyle,animatedTransformationStyle]}/>
+        <Animated.Image source={localPngImages.CrossIconPng} style={[styles.imageStyle, animatedTransformationStyle]} />
       </Pressable>
 
-    </View>
+    </Pressable>
   );
 };
 
@@ -170,6 +263,12 @@ const styles = StyleSheet.create({
 
   },
   upperViewStyle: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1,
     height: vh(300),
     backgroundColor: color.stellBlue,
     borderBottomLeftRadius: normalize(50),
@@ -179,18 +278,13 @@ const styles = StyleSheet.create({
     height: vh(80),
     backgroundColor: color.Neutral_White,
     width: vw(303),
-    borderRadius: normalize(15)
+    borderRadius: normalize(15),
+    flexDirection: 'row'
   },
   defaultStyle: {
-    position: 'absolute',
     zIndex: 1,
     top: vh(300),
-
     height: vh(400)
-    // left:0,
-    // right:0,
-    // bottom:0,
-
   },
   conatinerStyle: {
     gap: normalize(10)
@@ -221,9 +315,96 @@ const styles = StyleSheet.create({
     marginRight: vw(10),
     borderRadius: normalize(10)
   },
-  imageStyle:{
-    height:vh(70),
-    width:vw(70),
-    
+  imageStyle: {
+    height: vh(70),
+    width: vw(70),
+  },
+  imageView: {
+    height: vh(60),
+    width: vw(60),
+    // borderRadius:normalize(30),
+  },
+  ratingView: {
+    marginTop: vh(10),
+    marginLeft: vw(10),
+    flexDirection: 'row'
+  },
+  rateView: {
+    marginTop: vh(4),
+    marginLeft: vw(4)
+  },
+  rateText: {
+    fontSize: normalize(18),
+    fontFamily: fonts.RobotoSemiBold
+  },
+  commentView: {
+
+    height: vh(40),
+    marginTop: vh(6),
+
+    marginLeft: vw(10)
+  },
+  commentText: {
+    fontSize: normalize(11.3),
+    fontFamily: fonts.RobotoRegular,
+    color: color.Gray2
+  },
+  viewMoreText: {
+    fontSize: normalize(14),
+    fontFamily: fonts.RobotoSemiBold,
+    color: color.secondary40
+  },
+  optionsStyle: {
+    position: 'absolute',
+    left: '94%',
+    top: vh(9),
+
+  },
+  reviewView: {
+
+  },
+  commentStyle: {
+    alignSelf: 'center',
+    marginTop: vh(70),
+    fontSize: normalize(20),
+    color: color.secondary40
+  },
+  optionContainerView: {
+    position: 'absolute',
+    height: vh(60),
+    left: '60%',
+    top: vh(20),
+    width: vw(140),
+    backgroundColor: color.Netual_White_Light,
+    zIndex: 1,
+    borderRadius: normalize(10)
+  },
+  optionMainView: {
+
+    height: vh(screenHeight),
+    width: vw(screenWidth),
+    backgroundColor: color.Netual_White_Light,
+    zIndex: 1
+  },
+  optionTextStyle: {
+    fontSize: normalize(18),
+    fontFamily: fonts.RobotoSemiBold
+
+    // marginTop:vh(10),
+
+  },
+  optionTextView: {
+    // marginTop:vh(10),
+    height: '50%',
+    width: '100%',
+    borderBottomWidth: normalize(0.3),
+    borderColor: color.Gray4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cardTextStyle: {
+    alignSelf: 'center',
+    marginTop: vh(12),
+    fontSize: normalize(20)
   }
 }); 

@@ -31,12 +31,14 @@ interface AuthState{
     loading:boolean,
     isAuthenticate:boolean,
     user:userState| null,
+    language:string
 }
 const initialAuthState:AuthState = {
     isLogin:false,
     isAuthenticate:false,
     loading:false,
     user:null,
+    language:'en'
 };
 //categories data
 export type CategoriesData={

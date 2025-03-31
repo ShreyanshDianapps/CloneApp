@@ -76,7 +76,7 @@ export const MainProfileScreen = (props: Props) => {
         onPress={()=>props.navigation.navigate(screenNames.SettingsScreen)} />
           <ProfilePageCard titleText={strings.settings}
         discroptionText={strings.password + ',' + strings.gap + strings.notifications}
-        onPress={()=>props.navigation.navigate(screenNames.TopBarScreen)} />
+        onPress={()=>props.navigation.navigate(screenNames.SelectLanguageScreen)} />
          <ProfilePageCard titleText={strings.settings}
         discroptionText={strings.password + ',' + strings.gap + strings.notifications}
         onPress={()=>props.navigation.navigate(screenNames.TabBarLibScreen)} />

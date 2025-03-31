@@ -44,6 +44,9 @@ export type ProfileNavigationStack={
     SettingBottomScreen:{value:string,height:number,sendDataBack:(data:rootData)=>void}
     TopBarScreen:undefined
     TabBarLibScreen:undefined
+    SelectLanguageScreen:undefined
+    PhoneNumberScreen:undefined
+    OtpScreen:undefined
 }
 export type BottomNavigationStack={
     HomeRouter:undefined
@@ -82,5 +85,6 @@ export type RootNavigationStack={
      HarshUi:undefined//
      //profile
      ProfileRouter:undefined
+     SplashScreen:undefined
 
 }

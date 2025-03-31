@@ -18,7 +18,7 @@ target 'CloneApp' do
   use_frameworks! :linkage => :static
   $RNFirebaseAsStaticFramework = true
   config = use_native_modules!
-
+  pod 'RNI18n', :path => '../node_modules/react-native-i18n'
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.

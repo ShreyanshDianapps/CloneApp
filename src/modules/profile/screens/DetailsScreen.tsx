@@ -12,7 +12,6 @@ import { normalize, vh, vw } from '@cloneApp/utils/dimensions';
 import fonts from '@cloneApp/utils/fonts';
 import color from '@cloneApp/utils/color';
 
-
 type Props = {
     navigation: NativeStackNavigationProp<ProfileNavigationStack, 'DetailsScreen'>;
 }
@@ -76,14 +75,14 @@ const styles = StyleSheet.create({
     itemView:{
         flexDirection:'row',
         marginHorizontal:vw(16),
-        marginTop:vh(20),
-        height:vh(104),
+        marginTop:vh(10),
+        // height:vh(104),
         backgroundColor:color.Neutral_White,
         borderRadius:normalize(10),
     },
     imageStyle:{
         width:vw(104),
-        height:vh(104),
+        height:'100%'
     },
     overlayStyle:{
         position:'absolute',
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
     },
     infoView:{
         marginHorizontal:vw(10),
-        marginTop:vh(10),
+        marginTop:vh(5),
         flex:1,
     },
     titleText:{
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
         color:color.Gray3,
     },
     brandText:{
-        marginTop:vh(10),
+        marginTop:vh(5),
         fontSize:normalize(11),
         fontFamily:fonts.RobotoRegular,
         color:color.Gray3,
@@ -123,8 +122,9 @@ const styles = StyleSheet.create({
     quantityAndPriceView:{
         flexDirection:'row',
        justifyContent:'space-between',
-        marginTop:vh(10),
+        marginTop:vh(5),
         alignItems:'center',
+        marginBottom:vh(5)
 
 
     },
